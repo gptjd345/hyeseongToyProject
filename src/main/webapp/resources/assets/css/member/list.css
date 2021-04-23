@@ -1,0 +1,33 @@
+
+
+.btn_Container
+{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 80px;
+}
+
+.btn_Container .btn_1
+{
+    margin-right: 30px;
+}
+
+
+#pager
+{
+    text-align: center;
+    margin-top : 40px;
+}
+
+#pager a
+{
+    color : #635c5c
+}
+
+#pager a span
+{
+    margin : 6px;
+}
+
+
+
