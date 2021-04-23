@@ -52,11 +52,10 @@
           <div class="cart_inner">
             <div class="table-responsive">
               <table class="table">
-                
                 <tbody>
                   <tr class="bottom_button">
                     <td>
-                      <a class="btn_1" href="#">회원관리</a>
+                      <a class="btn_1" href="./member/list.do">회원관리</a>
                     </td>
                     <td>
                         <a class="btn_1" href="#">게시판</a>

@@ -1,5 +1,7 @@
 package com.example.toyProject.service.member;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -30,6 +32,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void logout(HttpSession session) {
 		session.invalidate();
+	}
+
+	@Override
+	public List<MemberDTO> list(int start, int end) {
+		
+		return memberDAO.list(start,end);
+	}
+	
+	//멤버 수를 찾아온다. 
+	@Override
+	public int count() {
+		return memberDAO.count();
 	}
 	
 	

@@ -28,8 +28,10 @@
                                 	<li> <a href="${path}/member/login.do"><span class="flaticon-user"></span></a></li>
                                 </c:if>
                                 <c:if test="${name != null}">
-                					<span>${sessionScope.name}님</span>
-                					<a href="/member/logout.do"><span id="logout">-Log out-</span></a>
+                                	<li>
+                						<span>${sessionScope.name}님</span>
+                						<a href="/member/logout.do"><span id="logout">-Log out-</span></a>
+                					</li>	
                 				</c:if>
                 				
                                 <li><a href="cart.html"><span class="flaticon-shopping-cart"></span></a> </li>

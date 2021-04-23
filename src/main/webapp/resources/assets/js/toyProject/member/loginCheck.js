@@ -22,7 +22,7 @@ $('#login').click(function(e)
 	        success: function(result)
 	        {
 	            if(result == "success"){
-	                alert(result.length);
+	                alert("로그인 성공");
 	                window.location.replace('/');
 	            }
 	            else if(result == "fail"){

@@ -11,4 +11,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userid=#{userid} and password=#{password}
 	</select>
 	
+	<select id="list" resultType="com.example.toyProject.model.member.dto.MemberDTO">
+		<include refid="member_header"/>
+			select * from member order by joindate desc) sortedM
+		<include refid="member_footer"/>	
+	</select>
+	
+	<sql id="member_header">
+		select * from (select rownum N, sortedM.* from (
+	</sql>
+	
+	<sql id="member_footer">
+		) where N between #{start} and #{end}
+	</sql>
+	
+	<select id="count" resultType="Integer">
+		select count(*) from member
+	</select>
+	
+	
 </mapper>	
