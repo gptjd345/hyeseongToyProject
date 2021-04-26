@@ -41,7 +41,7 @@
                             <div class="login_part_form_iner">
                                 <h3> <br>
                                     Please fill your info up</h3>
-                                <form class="row contact_form" action="#" method="post" novalidate="novalidate" id= "registration-form">
+                                <form class="row contact_form" action="./signUp.do" method="post" novalidate="novalidate" id= "registration-form">
                                     
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="userid" name="userid" value="" placeholder="User ID">
@@ -56,7 +56,7 @@
                                         <input type="text" class="form-control" id="name" name="name" value="" placeholder="Name">
                                     </div>
                                     <div class="col-md-12 form-group p_star">
-                                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="" placeholder="PhoneNumber">
+                                        <input type="text" class="form-control" id="phonenum" name="phonenum" value="" placeholder="PhoneNumber : 010-1234-5678">
                                     </div>
 
 

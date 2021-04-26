@@ -24,8 +24,10 @@ public class MemberServiceImpl implements MemberService {
 		if(name != null)
 		{
 			session.setAttribute("name", name);
+			System.out.println("Service name: "+name);
 			return name;
 		}
+		
 		return null;
 	}
 
@@ -46,6 +48,18 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.count();
 	}
 	
+	//아이디 중복 확인
+	@Override
+	public int idCheck(String userid)
+	{
+		return memberDAO.idCheck(userid);
+	}
 	
+	//회원가입
+	@Override
+	public void signUp(MemberDTO dto)
+	{
+		memberDAO.signUp(dto);
+	}
 
 }

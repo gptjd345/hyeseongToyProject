@@ -1,17 +1,9 @@
-
-
 .btn_Container
 {
     display: flex;
     justify-content: flex-end;
     margin-top: 80px;
 }
-
-.btn_Container .btn_1
-{
-    margin-right: 30px;
-}
-
 
 #pager
 {
@@ -28,6 +20,28 @@
 {
     margin : 6px;
 }
+
+.btn_Container .btn_1
+{
+    margin-right: 30px;
+}
+
+
+.fail{
+    color: red;
+}
+
+.input-container
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    border: rgba(128, 128, 128, 0.438) solid 1px;
+    padding : 60px;
+
+    
+}
+
 
 
 

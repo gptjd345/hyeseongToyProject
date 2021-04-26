@@ -9,7 +9,8 @@
 	<%@include file="../include/baseCss.jsp" %>
 	
 	<!-- Toy Project CSS -->
-    <link rel="stylesheet" href="/resources/assets/css/member/list.css">
+    <link rel="stylesheet" href="/resources/assets/css/member/list.css?version=1.0">
+    
 </head>
 <body>
   <header>
@@ -50,7 +51,7 @@
 	                        <td>${row.membernum}</td>
 	                        <td>${row.userid}</td>
 	                        <td>${row.name}</td>
-	                        <td>${row.phoneNum}</td>
+	                        <td>${row.phonenum}</td>
 	                        <td><fmt:formatDate value = "${row.joindate}" pattern="yyyy-MM-dd HH:mm" /></td> <!-- 날짜의 출력형식을 변경 -->
 	                    </tr>
 	                </c:forEach>  
@@ -72,6 +73,25 @@
               			</c:forEach>
 	                <a href="list.do?curBlock=${map.pager.nextBlock}"><span><i class="fas fa-angle-right" title="다음"></i><span></a>
 	              </nav>
+	              
+	           <form action="#">
+                  <div class="input-container">
+                    <div>  
+                        <input type="text" placeholder="아이디">
+                    </div>
+                    <div>    
+                        <input type="password" placeholder="비밀번호">
+                    </div>
+                    <div>    
+                        <input type="text" placeholder="이름">
+                    </div>
+                    <div>    
+                        <input type="text" placeholder="전화번호">
+                    </div>         
+                  </div>               
+              </form>
+	              
+	              
               
               <div class="btn_Container">
                 <div>
@@ -106,8 +126,10 @@
 	<!-- 기본적으로 사용하는 JS 내용들  -->
 	<%@include file="../include/baseJS.jsp" %>
 	
+	<!-- Toy Project JS -->
+	<script src="resources/assets/js/toyProject/member/list.js"></script>
 	
- 
+
 
 </body>
 </html>

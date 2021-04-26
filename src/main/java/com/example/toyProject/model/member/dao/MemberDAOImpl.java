@@ -42,5 +42,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.count");
 	}
 	
+	//아이디 중복 여부 확인 
+	@Override
+	public int idCheck(String userid)
+	{
+		return sqlSession.selectOne("member.idCheck",userid);
+	}
+	
+	//회원 가입
+	@Override
+	public void signUp(MemberDTO dto)
+	{
+		sqlSession.selectOne("member.signUp",dto);
+	}
 	
 }

@@ -24,6 +24,4 @@
       <link rel="stylesheet" href="/resources/assets/css/nice-select.css">
       <link rel="stylesheet" href="/resources/assets/css/style.css">
 
-    <!-- Toy Project CSS -->
-    <link rel="stylesheet" href="/resources/assets/css/member/memberManage.css">
 

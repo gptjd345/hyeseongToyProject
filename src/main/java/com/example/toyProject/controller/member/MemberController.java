@@ -2,6 +2,7 @@ package com.example.toyProject.controller.member;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -89,6 +91,30 @@ public class MemberController {
 		mav.setViewName("member/list");
 		mav.addObject("map",map);
 		return mav;
+		
+	}
+	
+	//회원가입시 아이디 중복 확인 
+	@RequestMapping("/idCheck.do")
+	public @ResponseBody int idCheck(@RequestBody Map<String,String> map)
+	{
+		System.out.println("Controller: userid = "+map.get("userid"));
+		//json 형태로 데이터를 받아야하니 Map 객체로 받아서 전달한다. 
+		int result = memberService.idCheck(map.get("userid"));
+		System.out.println("result : " + result);
+		
+		return result;
+	}
+	
+	//회원가입 처리 끝나면 로그인 화면으로 이동
+	@RequestMapping("/signUp.do")
+	public String signUp(@ModelAttribute MemberDTO dto)
+	{
+		dto.toString();
+		
+		memberService.signUp(dto);
+		
+		return "member/login";
 		
 	}
 	

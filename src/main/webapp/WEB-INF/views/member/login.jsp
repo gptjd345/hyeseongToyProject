@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="/resources/assets/css/nice-select.css">
         <link rel="stylesheet" href="/resources/assets/css/style.css">
         
-    <!-- toyCSS-->    
+    <!-- Toy Project CSS-->    
         <link rel="stylesheet" href="/resources/assets/css/member/login.css">
 </head>
 <body>
@@ -141,7 +141,7 @@
     <script src="/resources/assets/js/main.js"></script>
 
     <!--유효성 검사 -->
-    <script src="/resources/assets/js/toyProject/member/loginCheck.js?ver1.1"></script>
+    <script src="/resources/assets/js/toyProject/member/loginCheck.js?ver1.3"></script>
 
 </body>
     

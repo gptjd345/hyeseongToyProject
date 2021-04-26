@@ -6,28 +6,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="member">
-	<select id="login_check" resultType="String">
+	<select id = "login_check" resultType="String">
 		select name from member
 		where userid=#{userid} and password=#{password}
 	</select>
 	
-	<select id="list" resultType="com.example.toyProject.model.member.dto.MemberDTO">
+	<select id = "list" resultType="com.example.toyProject.model.member.dto.MemberDTO">
 		<include refid="member_header"/>
 			select * from member order by joindate desc) sortedM
 		<include refid="member_footer"/>	
 	</select>
 	
-	<sql id="member_header">
+	<sql id = "member_header">
 		select * from (select rownum N, sortedM.* from (
 	</sql>
 	
-	<sql id="member_footer">
+	<sql id = "member_footer">
 		) where N between #{start} and #{end}
 	</sql>
 	
-	<select id="count" resultType="Integer">
+	<select id = "count" resultType="Integer">
 		select count(*) from member
 	</select>
 	
+	<!-- 아이디 중복 여부 체크 -->
+	<select id = "idCheck" resultType="Integer" parameterType="String">
+		select count(*) from member where userid = #{userid}
+	</select>
+	
+	
+	<!-- 회원가입 수행  -->
+	<select id = "signUp" parameterType="com.example.toyProject.model.member.dto.MemberDTO">
+		insert into member (membernum, userid, password, name, phonenum, joindate) 
+			values (seq_member.nextval , #{userid}, #{password} , #{name}, #{phonenum}, sysdate)
+	</select>
 	
 </mapper>	

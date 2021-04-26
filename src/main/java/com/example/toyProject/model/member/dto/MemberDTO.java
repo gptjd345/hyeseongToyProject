@@ -8,7 +8,7 @@ public class MemberDTO {
 	private String userid;
 	private String password;
 	private String name;
-	private String phoneNum;
+	private String phonenum;
 	private Date joindate;
 	
 	public int getMembernum() {
@@ -41,17 +41,17 @@ public class MemberDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPhoneNum() {
-		return phoneNum;
+	public String getPhonenum() {
+		return phonenum;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNum = phoneNumber;
+	public void setPhonenum(String phonenum) {
+		this.phonenum = phonenum;
 	}
 	
 	@Override
 	public String toString() {
 		return "MemberDTO [membernum=" + membernum + ", userid=" + userid + ", password=" + password + ", name=" + name
-				+ ", phoneNum=" + phoneNum + ", joindate=" + joindate + "]";
+				+ ", phonenum=" + phonenum + ", joindate=" + joindate + "]";
 	}
 	
 	

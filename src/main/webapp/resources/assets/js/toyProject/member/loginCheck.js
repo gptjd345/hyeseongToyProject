@@ -36,14 +36,11 @@ $('#login').click(function(e)
     {
         //뒤에 span 태그는 하나만 있어야함 
         $('#userid').nextAll("*").remove();
-        $('#password').nextAll("*").remove();
-
         $('#userid').after('<span class="fail"> 아이디를 입력해주세요. </span>');
      }   
     else(password.length == 0 )
     {
     	 //뒤에 span 태그는 하나만 있어야함 
-        $('#userid').nextAll("*").remove();
         $('#password').nextAll("*").remove();
         $('#password').after('<span class="fail"> 비밀번호를 입력해주세요. </span>');     
     }
