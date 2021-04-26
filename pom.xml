@@ -14,7 +14,7 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-		
+		 
 		<!-- json객체를 사용하기위한 라이브러리 -->
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
