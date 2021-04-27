@@ -23,13 +23,13 @@
                                     </div>
                                 </li>
                                 
-                                <c:set var="name" value="${sessionScope.name}"/>
-                                <c:if test="${name == null}">
+                                <c:set var="userid" value="${sessionScope.resultDTO.userid}"/>
+                                <c:if test="${userid == null}">
                                 	<li> <a href="${path}/member/login.do"><span class="flaticon-user"></span></a></li>
                                 </c:if>
-                                <c:if test="${name != null}">
+                                <c:if test="${userid != null}">
                                 	<li>
-                						<span>${sessionScope.name}님</span>
+                						<span>${userid}님</span>
                 						<a href="/member/logout.do"><span id="logout">-Log out-</span></a>
                 					</li>	
                 				</c:if>

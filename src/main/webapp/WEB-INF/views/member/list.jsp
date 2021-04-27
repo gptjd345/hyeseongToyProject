@@ -90,6 +90,8 @@
                     </div>         
                   </div>               
               </form>
+              
+              <button type="button" id="close-container" class="float-right">X</button>
 	              
 	              
               

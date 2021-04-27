@@ -1,6 +1,8 @@
 package com.example.toyProject.controller.member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,11 +38,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="login_check.do" ,method = RequestMethod.POST)
-	public @ResponseBody String login_check(@RequestBody MemberDTO dto, HttpSession session)
+	public @ResponseBody String login_check(@ModelAttribute MemberDTO dto, HttpSession session)
 	{
-		//로그인의 결과가 이름임 
-		String name = memberService.login_Check(dto, session);
-		if(name != null)
+		//로그인 성공시 만들어진 객체가 null 이 아닌 경우 
+		if(memberService.login_Check(dto, session) != null)
 			return "success";
 		else
 		return "fail";
@@ -54,10 +55,10 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping("registration.do")
-	public String register()
+	@RequestMapping(value="signUp.do", method = RequestMethod.GET)
+	public String signUp()
 	{
-		return "member/registration";
+		return "member/signUp";
 	}
 	
 	
@@ -81,10 +82,15 @@ public class MemberController {
 		List<MemberDTO> list = memberService.list(start,end);
 		System.out.println("list:"+list);
 		
+//		기본적으로 	ArrayList 를 사용한다. 	
+//		System.out.println(list instanceof ArrayList);
+//		System.out.println(list instanceof LinkedList);
+		
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		
 		map.put("list", list);
 		map.put("pager", pager);
+
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -96,18 +102,18 @@ public class MemberController {
 	
 	//회원가입시 아이디 중복 확인 
 	@RequestMapping("/idCheck.do")
-	public @ResponseBody int idCheck(@RequestBody Map<String,String> map)
+	public @ResponseBody int idCheck(@RequestParam String userid)
 	{
-		System.out.println("Controller: userid = "+map.get("userid"));
+		System.out.println("Controller: userid = "+userid);
 		//json 형태로 데이터를 받아야하니 Map 객체로 받아서 전달한다. 
-		int result = memberService.idCheck(map.get("userid"));
+		int result = memberService.idCheck(userid);
 		System.out.println("result : " + result);
 		
 		return result;
 	}
 	
-	//회원가입 처리 끝나면 로그인 화면으로 이동
-	@RequestMapping("/signUp.do")
+	//회원가입 처리
+	@RequestMapping(value="/signUp.do", method = RequestMethod.POST)
 	public String signUp(@ModelAttribute MemberDTO dto)
 	{
 		dto.toString();

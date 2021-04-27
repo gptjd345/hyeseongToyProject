@@ -2,7 +2,6 @@ package com.example.toyProject.model.member.dao;
 
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +21,7 @@ public class MemberDAOImpl implements MemberDAO {
 	SqlSession sqlSession;  
 	
 	@Override
-	public String login_Check(MemberDTO dto) {
-		
+	public MemberDTO login_Check(MemberDTO dto) {
 		
 		return sqlSession.selectOne("member.login_check",dto);
 	}

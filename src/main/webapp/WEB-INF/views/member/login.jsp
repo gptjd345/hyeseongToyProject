@@ -59,7 +59,7 @@
                                 <h2>New to our Shop?</h2>
                                 <p>There are advances being made in science and technology
                                     everyday, and a good example of this is the</p>
-                                <a href="registration.do" class="btn_3">Create an Account</a>
+                                <a href="signUp.do" class="btn_3">Create an Account</a>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                             <div class="login_part_form_iner">
                                 <h3>Welcome Back ! <br>
                                     Please Sign in now</h3>
-                                <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                                <form class="row contact_form" id="login-form" action="./login_check.do" method="post" novalidate="novalidate">
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="userid" name="userid" value=""
                                             placeholder="User ID">
@@ -82,7 +82,7 @@
                                             <input type="checkbox" id="f-option" name="selector">
                                             <label for="f-option">Remember me</label>
                                         </div>
-                                        <button type="submit" value="submit" class="btn_3" id="login">
+                                        <button type="button" value="submit" class="btn_3" id="login">
                                             log in
                                         </button>
                                         <a class="lost_pass" href="#">forget password?</a>
@@ -141,7 +141,7 @@
     <script src="/resources/assets/js/main.js"></script>
 
     <!--유효성 검사 -->
-    <script src="/resources/assets/js/toyProject/member/loginCheck.js?ver1.3"></script>
+    <script src="/resources/assets/js/toyProject/member/loginCheck.js?ver1.5"></script>
 
 </body>
     

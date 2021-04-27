@@ -17,15 +17,15 @@ public class MemberServiceImpl implements MemberService {
 	MemberDAO memberDAO;
 	
 	@Override
-	public String login_Check(MemberDTO dto, HttpSession session) {
-		// TODO Auto-generated method stub
-		//쿼리 성공시 이름이 반환됨
-		String name = memberDAO.login_Check(dto);
-		if(name != null)
+	public MemberDTO login_Check(MemberDTO dto, HttpSession session) {
+		//쿼리 성공시 DTO 완성된 객체가 반환된다. 변수를 굳이 만든건 찍어보기 위해서이다.  
+		MemberDTO resultDTO = memberDAO.login_Check(dto);
+		
+		if(resultDTO != null)
 		{
-			session.setAttribute("name", name);
-			System.out.println("Service name: "+name);
-			return name;
+			session.setAttribute("resultDTO", resultDTO);
+			System.out.println("Service name: "+resultDTO);
+			return resultDTO;
 		}
 		
 		return null;

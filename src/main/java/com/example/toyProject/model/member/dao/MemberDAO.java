@@ -6,7 +6,7 @@ import com.example.toyProject.model.member.dto.MemberDTO;
 
 public interface MemberDAO {
 	 
-	 String login_Check(MemberDTO dto);
+	 MemberDTO login_Check(MemberDTO dto);
 	
 	 List<MemberDTO> list(int start, int end);
 	

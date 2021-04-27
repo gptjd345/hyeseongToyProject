@@ -7,7 +7,7 @@
 	<%@include file="../include/baseCss.jsp" %>
      
     <!-- ToyProject CSS 추후에 -->
-    <link rel="stylesheet" href="/resources/assets/css/member/registration.css">        
+    <link rel="stylesheet" href="/resources/assets/css/member/signUp.css">        
 </head>
 <body>
     <header>
@@ -23,7 +23,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-12">
                             <div class="hero-cap text-center">
-                                <h2>Registrion</h2>
+                                <h2>Sign Up</h2>
                             </div>
                         </div>
                     </div>
@@ -61,8 +61,8 @@
 
 
                                     <div class="col-md-12 form-group">
-                                        <button type="submit" value="submit" class="btn_3" id="registration">
-                                            Registraion
+                                        <button type="submit" value="submit" class="btn_3" id="signUp">
+                                            Sign Up
                                         </button>
                                         <a class="registraion_cancle" href="#">���</a>
                                     </div>
@@ -99,7 +99,7 @@
 	<%@include file="../include/baseJS.jsp" %>
 
     <!-- toyProject -->
-    <script src="/resources/assets/js/toyProject/member/registration.js"></script>
+    <script src="/resources/assets/js/toyProject/member/signUp.js?version=1.2"></script>
 
 </body>
     

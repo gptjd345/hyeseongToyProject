@@ -15,10 +15,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		
 		//로그인 여부 확인 
-		//로그인 성공시 이름을 세션에 저장했기 때문에 이름 확인한다.  
-		if(session.getAttribute("name") != null)
+		//로그인 성공시 세션에는 resultDTO라는 이름으로 DTO 객체가 저장되어있다.   
+		if(session.getAttribute("resultDTO") != null)
 		{
-			System.out.println("Intercep: "+session.getAttribute("name"));
+			System.out.println("Intercep: "+session.getAttribute("resultDTO"));
 			return true; //메인 액션 실행가능
 		}
 		else {

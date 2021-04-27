@@ -6,7 +6,7 @@ var idValidate = function(){
     var ID = $('#userid').val().trim();
     
     var IdCheck = RegExp(/^[a-zA-Z0-9]{5,16}$/);
-    var data = {"userid" : ID};
+    
     if(!IdCheck.test(ID))
     { 
         $('#userid').nextAll("*").remove();
@@ -19,9 +19,8 @@ var idValidate = function(){
         $.ajax({
             url: "/member/idCheck.do",
             type: 'post',
-            data: JSON.stringify(data),
-            contentType : 'application/json',
-            dataType: "json",
+            data: {"userid" : ID},
+            dataType: "text",
             success: function(result)
             {
                 if(result==1){
@@ -74,11 +73,13 @@ var pwValidate2 = function() {
 //이름 확인 유효성 검사 함수
 var nameValidate = function() {
     var Name = $("#name").val().trim();
-
-    if(Name.length == 0)
+    // (?:x|y) x와 y중 하나  이거 안쓰면 앞검사통과하면 뒤에 검사 진행하지 않는다. 
+    var pwCheck = RegExp(/^(?:([가-힣]{2,4})|([a-zA-Z]{3,16}))$/);
+    
+    if(!pwCheck.test(Name))
     {
         $("#name").nextAll("*").remove();
-        $("#name").after('<span class="fail">이름을 입력해주세요 </span>'); 
+        $("#name").after('<span class="fail">이름을 입력해주세요.(한글 2~4, 영문 3~16 사용 가능 합니다. ) </span>'); 
     }
     else{
         $("#name").nextAll("*").remove();
@@ -122,8 +123,8 @@ $('#phonenum').blur(phoneValidate);
 
 
 
-//등록 버튼 클릭 시 success클래스의 개수 확인
-$("#registration").click(function(e)
+//등록 버튼 클릭 시 fail클래스의 개수 확인
+$("#signUp").click(function(e)
 {
 	//사용자가 입력 필드에 입력한 내용을 수정하고 등록버튼을 누를수있으니 버튼클릭시 검사를 다시 진행한다.
 	//id 유효성 검사 
@@ -141,13 +142,14 @@ $("#registration").click(function(e)
     //전화번호 유효성 검사
     phoneValidate();
 
-    //fail span 태그가 하나도 없으면 통과  
+    //fail span 태그가 하나도 없으면 통과 기본이벤트 진행 
     if($('.fail').length == 0 )
     {
         window.alert("회원가입이 완료 되었습니다.");
     }
     else
     {
+    	//기본이벤트를 막는다. 
         e.preventDefault();
     }
 

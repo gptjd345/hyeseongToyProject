@@ -8,7 +8,7 @@ import com.example.toyProject.model.member.dto.MemberDTO;
 
 public interface MemberService {
 	
-	String login_Check(MemberDTO dto, HttpSession session);
+	MemberDTO login_Check(MemberDTO dto, HttpSession session);
 	
 	void logout(HttpSession session);
 	
