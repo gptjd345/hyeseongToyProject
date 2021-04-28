@@ -9,7 +9,7 @@
 	<%@include file="../include/baseCss.jsp" %>
 	
 	<!-- Toy Project CSS -->
-    <link rel="stylesheet" href="/resources/assets/css/member/list.css?version=1.0">
+    <link rel="stylesheet" href="/resources/assets/css/member/list.css?version=1.1">
     
 </head>
 <body>
@@ -39,6 +39,7 @@
             <div class="table-responsive">
               <table class="table">
                 <thead>
+                	<th>선택</th>
                     <th>번호</th>
                     <th>아이디</th>
                     <th>이름</th>
@@ -48,6 +49,7 @@
                 <tbody>
 	                <c:forEach var="row" items="${map.list}">
 	                    <tr>
+	                    	<td><input type="checkbox"/></td>
 	                        <td>${row.membernum}</td>
 	                        <td>${row.userid}</td>
 	                        <td>${row.name}</td>
@@ -73,42 +75,30 @@
               			</c:forEach>
 	                <a href="list.do?curBlock=${map.pager.nextBlock}"><span><i class="fas fa-angle-right" title="다음"></i><span></a>
 	              </nav>
-	              
-	           <form action="#">
-                  <div class="input-container">
-                    <div>  
-                        <input type="text" placeholder="아이디">
-                    </div>
-                    <div>    
-                        <input type="password" placeholder="비밀번호">
-                    </div>
-                    <div>    
-                        <input type="text" placeholder="이름">
-                    </div>
-                    <div>    
-                        <input type="text" placeholder="전화번호">
-                    </div>         
-                  </div>               
-              </form>
+	           
+	           <!-- 현재 페이지 블록값을 저장 -->   
+	           <input type="hidden" class="curBlock" name="curBlock" value="${map.pager.curBlock}"/>
+	           
+	           <!-- 관리창을 받아올 곳 -->
+	           <div id="sendMe-manage-box">   
+	          		
+               </div>
               
-              <button type="button" id="close-container" class="float-right">X</button>
 	              
 	              
               
               <div class="btn_Container">
                 <div>
-                  <a class="btn_1" href="#">등록</a>
+                  <button type="button" class="btn_1" id="register-form">등록</button>
                 </div>
                 <div>
                     <a class="btn_1" href="#">수정</a>
                 </div>
                 <div>
                     <a class="btn_1" href="#">삭제</a>
-                 </div> 
-               </div>
-            </div>  
-         
-          </div>
+                </div> 
+              </div>
+              
       </section>
       <!--================End Cart Area =================-->
   </main>
@@ -129,7 +119,8 @@
 	<%@include file="../include/baseJS.jsp" %>
 	
 	<!-- Toy Project JS -->
-	<script src="resources/assets/js/toyProject/member/list.js"></script>
+	<script src="/resources/assets/js/toyProject/member/list.js?version=1.2"></script>
+	
 	
 
 

@@ -1,19 +1,13 @@
 package com.example.toyProject.controller.member;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -123,5 +117,27 @@ public class MemberController {
 		return "member/login";
 		
 	}
+	
+	//회원 관리용 창 요청 처리
+	@RequestMapping(value="/manage.do", method = RequestMethod.GET)
+	public String manage()
+	{
+		return "/member/managebox";
+	}
+	
+	//회원 관리 창에서 회원 등록 처리
+	@RequestMapping("/regist.do")
+	public String regist(@ModelAttribute MemberDTO dto , @RequestParam int curBlock)
+	{
+		System.out.print("등록전: "+ dto.toString()); 
+		System.out.println("curBlock : "+curBlock);
+		
+		//회원가입시 사용했던 것을 사용
+		memberService.signUp(dto);
+		
+		return "redirect:/member/list.do?curBlock="+curBlock;
+	}
+	
+	
 	
 }

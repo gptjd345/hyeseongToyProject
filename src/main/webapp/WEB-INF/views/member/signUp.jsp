@@ -64,7 +64,6 @@
                                         <button type="submit" value="submit" class="btn_3" id="signUp">
                                             Sign Up
                                         </button>
-                                        <a class="registraion_cancle" href="#">���</a>
                                     </div>
                                 </form>
                             </div>
