@@ -61,5 +61,20 @@ public class MemberServiceImpl implements MemberService {
 	{
 		memberDAO.signUp(dto);
 	}
+	
+	//회원정보 수정 창에 가져다 놓은 데이터가져옴
+	@Override
+	public MemberDTO getModifyInfo(String userid)
+	{
+		return memberDAO.getModifyInfo(userid);
+	}
+	
+	//회원 정보 등록 수정처리
+	@Override
+	public void registModify(MemberDTO dto)
+	{
+		memberDAO.registModify(dto);
+		
+	}
 
 }

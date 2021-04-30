@@ -22,4 +22,10 @@ public interface MemberService {
 	
 	//회원 가입
 	void signUp(MemberDTO dto);
+	
+	//회원 수정창에 가져올 정보
+	MemberDTO getModifyInfo(String userid);
+	
+	//회원 등록수정처리
+	void registModify(MemberDTO dto);
 }

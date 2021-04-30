@@ -13,18 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id = "list" resultType="com.example.toyProject.model.member.dto.MemberDTO">
-		<include refid="member_header"/>
-			select * from member order by joindate desc) sortedM
-		<include refid="member_footer"/>	
+		select * from member order by joindate desc
+								offset #{start} rows fetch next #{end} rows only
 	</select>
-	
-	<sql id = "member_header">
-		select * from (select rownum N, sortedM.* from (
-	</sql>
-	
-	<sql id = "member_footer">
-		) where N between #{start} and #{end}
-	</sql>
 	
 	<select id = "count" resultType="Integer">
 		select count(*) from member
@@ -41,5 +32,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into member (membernum, userid, password, name, phonenum, joindate) 
 			values (seq_member.nextval , #{userid}, #{password} , #{name}, #{phonenum}, sysdate)
 	</select>
+	
+	<!-- 수정할 회원 정보 가져오기 -->
+	<select id = "getModifyInfo" resultType="com.example.toyProject.model.member.dto.MemberDTO">
+		select * from member where userid = #{userid}
+	</select>
+	
+	<!-- 회원 등록 및 수정 -->
+	<update id = "registModify">
+		merge into member using dual
+	    	on (userid = #{userid})
+			    when matched then
+			        update set name = #{name}, phonenum = #{phonenum}, password = #{password}
+			    when not matched then
+			        insert (membernum, userid, password, name, phonenum, joindate)
+			        values (seq_member.nextval, #{userid}, #{password}, #{name}, #{phonenum}, sysdate)
+	</update>
+	
+	
+	
 	
 </mapper>	

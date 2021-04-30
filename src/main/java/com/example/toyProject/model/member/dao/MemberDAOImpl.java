@@ -29,7 +29,8 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<MemberDTO> list(int start, int end) {
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("start",start);
+		//offset 0  은 0번째 이후의 행을 가져온다. 
+		map.put("start",--start);
 		map.put("end", end);
 		return sqlSession.selectList("member.list",map);
 	}
@@ -53,5 +54,20 @@ public class MemberDAOImpl implements MemberDAO {
 	{
 		sqlSession.selectOne("member.signUp",dto);
 	}
+	
+	//수정할 회원 정보 가져오기
+	@Override
+	public MemberDTO getModifyInfo(String userid) {
+		
+		return sqlSession.selectOne("member.getModifyInfo",userid);
+	}
+	
+	//회원 등록 및 수정 처리
+	@Override
+	public void registModify(MemberDTO dto)
+	{
+		sqlSession.selectOne("member.registModify",dto);
+	}
+	
 	
 }

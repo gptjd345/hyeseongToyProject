@@ -18,4 +18,10 @@ public interface MemberDAO {
 	 
 	 //회원가입 절차
 	 void signUp(MemberDTO dto);
+	 
+	 //회원 정보 수정창에 가져올 정보
+	 MemberDTO getModifyInfo(String userid);
+	 
+	 //회원정보 등록 수정 
+	 void registModify(MemberDTO dto);
 }

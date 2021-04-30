@@ -42,11 +42,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("logout.do")
-	public ModelAndView logout(HttpSession session,ModelAndView mav)
+	public String logout(HttpSession session,ModelAndView mav)
 	{
 		memberService.logout(session);
-		mav.setViewName("member/login");
-		return mav;
+		
+		return "redirect:/member/login.do";
 	}
 	
 	@RequestMapping(value="signUp.do", method = RequestMethod.GET)
@@ -66,7 +66,8 @@ public class MemberController {
 		Pager pager = new Pager(totalPage,curBlock);
 		
 		int start = pager.getPageBegin();
-		int end = pager.getPageEnd();
+		//최대 몇 행까지 뽑을지  이부분은 나중에 언제든지 바꿀수 있도록 pager에서 받아서 쓴다. (10 고정)
+		int end = pager.PAGE_SCALE;
 		
 		System.out.println("totalPage = "+totalPage);
 		System.out.println("endBlock = "+pager.getendBlock());
@@ -120,22 +121,46 @@ public class MemberController {
 	
 	//회원 관리용 창 요청 처리
 	@RequestMapping(value="/manage.do", method = RequestMethod.GET)
-	public String manage()
+	public ModelAndView manage(@RequestParam int curBlock)
 	{
-		return "/member/managebox";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("curBlock",curBlock);
+		mav.setViewName("/member/manage");
+		
+		return mav;
 	}
 	
-	//회원 관리 창에서 회원 등록 처리
-	@RequestMapping("/regist.do")
+	//회원 관리 창에서 회원 등록 및 수정 처리
+	@RequestMapping("/registModify.do")
 	public String regist(@ModelAttribute MemberDTO dto , @RequestParam int curBlock)
 	{
 		System.out.print("등록전: "+ dto.toString()); 
 		System.out.println("curBlock : "+curBlock);
 		
 		//회원가입시 사용했던 것을 사용
-		memberService.signUp(dto);
+		memberService.registModify(dto);
 		
 		return "redirect:/member/list.do?curBlock="+curBlock;
+	}
+	
+	//회원 수정 창 가져오기 GET
+	@RequestMapping(value="/modify.do", method = RequestMethod.GET)
+	public ModelAndView modify(@RequestParam String userid, @RequestParam int curBlock)
+	{
+		//수정할 회원 정보 가져오기
+		MemberDTO dto = memberService.getModifyInfo(userid);
+		ModelAndView mav = new ModelAndView();
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		//수정창은 해당 아이디와 수정창으로 넘어오기전 블록 번호를 가지고있다.
+		map.put("dto", dto);
+		map.put("curBlock", curBlock);
+		
+		mav.setViewName("/member/manage");
+		mav.addObject("map",map);
+		
+		return mav;
 	}
 	
 	
