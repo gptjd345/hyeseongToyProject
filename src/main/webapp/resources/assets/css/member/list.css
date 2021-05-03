@@ -54,9 +54,13 @@
 
 .table-responsive a
 {
-	color : #007bff
+	color : #007bff;
 }
 
+.btn_Container #register-form
+{
+	color : white;
+}
 
 
 

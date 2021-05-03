@@ -12,7 +12,7 @@ public interface MemberService {
 	
 	void logout(HttpSession session);
 	
-	List<MemberDTO> list(int start,int end);
+	List<MemberDTO> list(int start);
 	
 	//회원정보 레코드 수를 센다. 
 	int count();
@@ -28,4 +28,9 @@ public interface MemberService {
 	
 	//회원 등록수정처리
 	void registModify(MemberDTO dto);
+	
+	//회원 삭제 처리
+	void delete(List<String> selectedRow);
+	
+	
 }

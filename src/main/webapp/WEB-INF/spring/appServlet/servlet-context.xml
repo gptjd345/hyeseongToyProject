@@ -29,8 +29,10 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/list.do"/>
+			<mapping path="/member/modify.do"/>
+			<mapping path="/member/registration"/>
+			<mapping path="/member/registModify.do"/>
 		
-			
 			<beans:ref bean="LoginInterceptor"/>
 		</interceptor>
 		<interceptor>
@@ -40,9 +42,9 @@
 		 
 			<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
 			 <beans:property name="cacheSeconds" value="0"/>
-			 <beans:property name="useExpiresHeader" value="true"/>
-			 <beans:property name="useCacheControlHeader" value="true"/>
-			 <beans:property name="useCacheControlNoStore" value="true"/>
+			 <beans:property name="useExpiresHeader" value="false"/>
+			 <beans:property name="useCacheControlHeader" value="false"/>
+			 <beans:property name="useCacheControlNoStore" value="false"/>
 			</beans:bean>
 
 		</interceptor>

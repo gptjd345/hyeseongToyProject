@@ -1,6 +1,6 @@
 package com.example.toyProject.controller.member;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.toyProject.model.member.dto.MemberDTO;
 import com.example.toyProject.service.member.MemberService;
-import com.example.toyProject.util.Pager;
 
 @Controller
 @RequestMapping("/member/*")
@@ -25,20 +24,20 @@ public class MemberController {
 	@Inject
 	MemberService memberService;
 	
-	@RequestMapping("login.do")
+	@RequestMapping(value="login.do", method = RequestMethod.GET)
 	public String login()
 	{
 		return "member/login";
 	}
 	
-	@RequestMapping(value="login_check.do" ,method = RequestMethod.POST)
-	public @ResponseBody String login_check(@ModelAttribute MemberDTO dto, HttpSession session)
+	@RequestMapping(value="login.do" ,method = RequestMethod.POST)
+	public String login_check(@ModelAttribute MemberDTO dto, HttpSession session)
 	{
 		//로그인 성공시 만들어진 객체가 null 이 아닌 경우 
 		if(memberService.login_Check(dto, session) != null)
-			return "success";
+			return "redirect:/";
 		else
-		return "fail";
+			return "/member/login";
 	}
 	
 	@RequestMapping("logout.do")
@@ -63,34 +62,27 @@ public class MemberController {
 		//전체 레코드 수 알아옴
 		int totalPage = memberService.count();
 		
-		Pager pager = new Pager(totalPage,curBlock);
-		
-		int start = pager.getPageBegin();
-		//최대 몇 행까지 뽑을지  이부분은 나중에 언제든지 바꿀수 있도록 pager에서 받아서 쓴다. (10 고정)
-		int end = pager.PAGE_SCALE;
+		//찾아올 시작 레코드 = 현재 블록 * 10 - 10 이다. 10은 한블록에 있는 레코드 수 
+		//offset은 쓰여진 숫자 다음 레코드를 가져오니 9가 아닌 10을 빼준다.
+		int start = (curBlock * 10) - 10;
 		
 		System.out.println("totalPage = "+totalPage);
-		System.out.println("endBlock = "+pager.getendBlock());
-		System.out.println("start = "+start);
-		System.out.println("end = "+end);
 		
-		List<MemberDTO> list = memberService.list(start,end);
+		List<MemberDTO> list = memberService.list(start);
+		System.out.println("curBlock:"+curBlock);
+		System.out.println("start:"+start);
 		System.out.println("list:"+list);
 		
 //		기본적으로 	ArrayList 를 사용한다. 	
 //		System.out.println(list instanceof ArrayList);
 //		System.out.println(list instanceof LinkedList);
 		
-		HashMap<String,Object> map = new HashMap<String,Object>();
-		
-		map.put("list", list);
-		map.put("pager", pager);
-
-		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("member/list");
-		mav.addObject("map",map);
+		mav.addObject("list",list);
+		mav.addObject("totalPage",totalPage);
+		mav.addObject("curBlock",curBlock);
 		return mav;
 		
 	}
@@ -99,8 +91,7 @@ public class MemberController {
 	@RequestMapping("/idCheck.do")
 	public @ResponseBody int idCheck(@RequestParam String userid)
 	{
-		System.out.println("Controller: userid = "+userid);
-		//json 형태로 데이터를 받아야하니 Map 객체로 받아서 전달한다. 
+		System.out.println("Controller: userid = "+userid); 
 		int result = memberService.idCheck(userid);
 		System.out.println("result : " + result);
 		
@@ -119,13 +110,13 @@ public class MemberController {
 		
 	}
 	
-	//회원 관리용 창 요청 처리
-	@RequestMapping(value="/manage.do", method = RequestMethod.GET)
+	//회원 등록 창 요청 처리
+	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView manage(@RequestParam int curBlock)
 	{
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("curBlock",curBlock);
-		mav.setViewName("/member/manage");
+		mav.setViewName("/member/registration");
 		
 		return mav;
 	}
@@ -144,25 +135,30 @@ public class MemberController {
 	}
 	
 	//회원 수정 창 가져오기 GET
-	@RequestMapping(value="/modify.do", method = RequestMethod.GET)
+	@RequestMapping(value="/modify", method = RequestMethod.GET)
 	public ModelAndView modify(@RequestParam String userid, @RequestParam int curBlock)
 	{
 		//수정할 회원 정보 가져오기
 		MemberDTO dto = memberService.getModifyInfo(userid);
 		ModelAndView mav = new ModelAndView();
-		
-		HashMap<String,Object> map = new HashMap<String,Object>();
-		
+			
+		mav.setViewName("/member/modify");
 		//수정창은 해당 아이디와 수정창으로 넘어오기전 블록 번호를 가지고있다.
-		map.put("dto", dto);
-		map.put("curBlock", curBlock);
-		
-		mav.setViewName("/member/manage");
-		mav.addObject("map",map);
+		mav.addObject("dto",dto);
+		mav.addObject("curBlock",curBlock);
 		
 		return mav;
 	}
 	
+	//회원 삭제 수행
+	@RequestMapping("/delete.do")
+	public @ResponseBody String delete(@RequestParam List<String> selectedRow)
+	{
+		System.out.println("selectedRow : "+selectedRow);
+		memberService.delete(selectedRow);
+		
+		return "success";
+	}
 	
 	
 }

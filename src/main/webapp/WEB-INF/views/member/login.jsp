@@ -68,7 +68,7 @@
                             <div class="login_part_form_iner">
                                 <h3>Welcome Back ! <br>
                                     Please Sign in now</h3>
-                                <form class="row contact_form" id="login-form" action="./login_check.do" method="post" novalidate="novalidate">
+                                <form class="row contact_form" id="login-form" action="/member/login.do" method="post" novalidate="novalidate">
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="userid" name="userid" value=""
                                             placeholder="User ID">
@@ -82,8 +82,8 @@
                                             <input type="checkbox" id="f-option" name="selector">
                                             <label for="f-option">Remember me</label>
                                         </div>
-                                        <button type="button" value="submit" class="btn_3" id="login">
-                                            log in
+                                        <button type="submit" class="btn_3" id="login">
+                                            log in 
                                         </button>
                                         <a class="lost_pass" href="#">forget password?</a>
                                     </div>
@@ -141,7 +141,7 @@
     <script src="/resources/assets/js/main.js"></script>
 
     <!--유효성 검사 -->
-    <script src="/resources/assets/js/toyProject/member/loginCheck.js?ver1.5"></script>
+    <script src="/resources/assets/js/toyProject/member/login.js?ver1.5"></script>
 
 </body>
     

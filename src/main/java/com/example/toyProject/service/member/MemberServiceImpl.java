@@ -1,5 +1,6 @@
 package com.example.toyProject.service.member;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,9 +38,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberDTO> list(int start, int end) {
+	public List<MemberDTO> list(int start) {
 		
-		return memberDAO.list(start,end);
+		return memberDAO.list(start);
 	}
 	
 	//멤버 수를 찾아온다. 
@@ -74,6 +75,13 @@ public class MemberServiceImpl implements MemberService {
 	public void registModify(MemberDTO dto)
 	{
 		memberDAO.registModify(dto);
+		
+	}
+	
+	//회원 정보 삭제 처리 
+	@Override
+	public void delete(List<String> selectedRow) {
+		memberDAO.delete(selectedRow);
 		
 	}
 

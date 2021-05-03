@@ -2,6 +2,7 @@ package com.example.toyProject.model.member.dao;
 
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,12 +28,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<MemberDTO> list(int start, int end) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		//offset 0  은 0번째 이후의 행을 가져온다. 
-		map.put("start",--start);
-		map.put("end", end);
-		return sqlSession.selectList("member.list",map);
+	public List<MemberDTO> list(int start) {
+		//offset 0  은 0번째 이후의 행을 가져온다. 컨트롤러에서 0을 빼서 넘겨주었음
+		return sqlSession.selectList("member.list",start);
 	}
 
 	//멤버 레코드 수를 알아온다. 
@@ -67,6 +65,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public void registModify(MemberDTO dto)
 	{
 		sqlSession.selectOne("member.registModify",dto);
+	}
+	
+	//회원 삭제 처리
+	@Override
+	public void delete(List<String> selectedRow) {
+		//DAO까지 잘가나 확인 
+		System.out.println("listDAO: "+selectedRow);
+		sqlSession.selectOne("member.delete",selectedRow);
 	}
 	
 	

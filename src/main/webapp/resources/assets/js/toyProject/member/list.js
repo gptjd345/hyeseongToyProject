@@ -1,9 +1,30 @@
 
-
-//등록 버튼이 클릭되었을 때
-$('#register-form').click(function(e)
+$('#delete').click(function(e) 
 {
-   //둥록 페이지로 이동한다. 
-	location.href= "./manage.do";
+	var selectedRow = [];
+	
+	$('input[name=checkbox]:checked').each(function(){
+		selectedRow.push($(this).val());
+	});
+	
+	$.ajax({
+        url: "/member/delete.do",
+        type: "post",
+        traditional : true,
+        data: { "selectedRow" : selectedRow } ,
+        dataType: "text",
+        success: function(result)
+        {
+            if(result == "success"){
+            	alert("삭제 되었습니다.");
+                window.location.replace("/member/list.do?curBlock="+$('.curBlock').val());
+                
+            }
+            else if(result == "fail"){
+                alert("실패");
+               
+            }
+        }
+    });
 });
 

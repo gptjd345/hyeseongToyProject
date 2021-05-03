@@ -8,7 +8,7 @@ public interface MemberDAO {
 	 
 	 MemberDTO login_Check(MemberDTO dto);
 	
-	 List<MemberDTO> list(int start, int end);
+	 List<MemberDTO> list(int start);
 	
 	 //멤버 레코드 수를 받아옴 
 	 int count();
@@ -24,4 +24,7 @@ public interface MemberDAO {
 	 
 	 //회원정보 등록 수정 
 	 void registModify(MemberDTO dto);
+	 
+	 //회원 정보 삭제
+	 void delete(List<String> selectedRow);
 }

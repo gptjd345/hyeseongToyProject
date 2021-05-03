@@ -23,7 +23,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-12">
                             <div class="hero-cap text-center">
-                                <h2>Manage</h2>
+                                <h2>Manage - Modify</h2>
                             </div>
                         </div>
                     </div>
@@ -41,40 +41,10 @@
                             <div class="login_part_form_iner">
                                 <h3> <br>
                                     Please fill your info up</h3>
-                                    
-                              <c:choose>
-                              	<c:when test="${map.dto == null}">
-                                <form class="row contact_form" action="./registModify.do" method="post" novalidate="novalidate" id= "registration-form">
-                                    <div class="col-md-12 form-group p_star">
-                                        <input type="text" class="form-control" id="userid" name="userid" value="" placeholder="User ID">
-                                    </div>
-                                    <div class="col-md-12 form-group p_star">
-                                        <input type="password" class="form-control" id="password" name="password" value="" placeholder="Password">
-                                    </div>
-                                    <div class="col-md-12 form-group p_star">
-                                        <input type="password" class="form-control" id="password2" name="password2" value="" placeholder="Password Check">
-                                    </div>
-                                    <div class="col-md-12 form-group p_star">
-                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Name">
-                                    </div>
-                                    <div class="col-md-12 form-group p_star">
-                                        <input type="text" class="form-control" id="phonenum" name="phonenum" value="" placeholder="PhoneNumber : 010-1234-5678">
-                                    </div>
-                                    
-                                    <input type="hidden" name="curBlock" value="${curBlock}"/>
-                                    
-                                    <div class="col-md-12 form-group">
-	                                        <button type="submit" value="submit" class="btn_3" id="signUp">
-	                                            Submit
-	                                        </button>
-	                                 </div>
-	                               </form>   
-                                  </c:when>
-                                   
-                                  <c:otherwise>
+                                                                 
                                   	<form class="row contact_form" action="./registModify.do" method="post" novalidate="novalidate" id= "registration-form">
 	                                  		 <div class="col-md-12 form-group p_star">
-	                                        <input type="text" class="form-control" id="userid" name="userid" value="${map.dto.userid}" readonly>
+	                                        <input type="text" class="form-control" id="userid" name="userid" value="${dto.userid}" readonly>
 	                                    </div>
 	                                    <div class="col-md-12 form-group p_star">
 	                                        <input type="password" class="form-control" id="password" name="password" value="" placeholder="Password">
@@ -83,15 +53,15 @@
 	                                        <input type="password" class="form-control" id="password2" name="password2" value="" placeholder="Password Check">
 	                                    </div>
 	                                    <div class="col-md-12 form-group p_star">
-	                                        <input type="text" class="form-control" id="name" name="name" value="${map.dto.name}" placeholder="Name">
+	                                        <input type="text" class="form-control" id="name" name="name" value="${dto.name}" placeholder="Name">
 	                                    </div>
 	                                    <div class="col-md-12 form-group p_star">
-	                                        <input type="text" class="form-control" id="phonenum" name="phonenum" value="${map.dto.phonenum}" placeholder="PhoneNumber : 010-1234-5678">
+	                                        <input type="text" class="form-control" id="phonenum" name="phonenum" value="${dto.phonenum}" placeholder="PhoneNumber : 010-1234-5678">
 	                                    </div>
 											
-											<input type="hidden" name="curBlock" value="${map.curBlock}"/>
+											<input type="hidden" name="curBlock" value="${curBlock}"/>
 											<!-- curBlock으로 통일 -->
-											<c:set var="curBlock" value="${map.curBlock}"/>
+											<c:set var="curBlock" value="${curBlock}"/>
 											
 	                                    <div class="col-md-12 form-group">
 	                                        <button type="submit" value="submit" class="btn_3" id="signUp">
@@ -99,8 +69,6 @@
 	                                        </button>
 	                                    </div>
 	                                </form>
-                                  </c:otherwise> 
-							 </c:choose>
                             </div>
                         </div>
                     </div>
@@ -134,7 +102,7 @@
 	<%@include file="../include/baseJS.jsp" %>
 
     <!-- toyProject -->
-    <script src="/resources/assets/js/toyProject/member/signUp.js?version=1.2"></script>
+    <script src="/resources/assets/js/toyProject/member/modify.js?version=1.0"></script>
 
 </body>
     
