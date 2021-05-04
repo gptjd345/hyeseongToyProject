@@ -29,7 +29,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/list.do"/>
-			<mapping path="/member/modify.do"/>
+			<mapping path="/member/modify"/>
 			<mapping path="/member/registration"/>
 			<mapping path="/member/registModify.do"/>
 		

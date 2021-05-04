@@ -38,15 +38,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberDTO> list(int start) {
+	public List<MemberDTO> list(int start, String searchOption, String searchKey) {
 		
-		return memberDAO.list(start);
+		return memberDAO.list(start, searchOption, searchKey);
 	}
 	
 	//멤버 수를 찾아온다. 
 	@Override
-	public int count() {
-		return memberDAO.count();
+	public int count(String searchOption, String searchKey) {
+		return memberDAO.count(searchOption,searchKey);
 	}
 	
 	//아이디 중복 확인

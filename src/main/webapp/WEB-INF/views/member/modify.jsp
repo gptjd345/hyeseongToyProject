@@ -77,7 +77,7 @@
                         <div class="login_part_text text-center">
                             <div class="login_part_text_iner">
                                 <h2>Welcome !!</h2>
-                                <a href="./list.do?curBlock=${curBlock}" class="btn_3">Go List Page</a>
+                                <a href="./list.do?curBlock=${pageDTO.curBlock}&searchOption=${pageDTO.searchOption}&searchKey=${pageDTO.searchKey}" class="btn_3">Go List Page</a>
                             </div>
                         </div>
                     </div>

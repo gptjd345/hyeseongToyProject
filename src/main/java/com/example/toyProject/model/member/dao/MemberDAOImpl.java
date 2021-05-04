@@ -2,7 +2,10 @@ package com.example.toyProject.model.member.dao;
 
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,15 +27,26 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<MemberDTO> list(int start) {
+	public List<MemberDTO> list(int start, String searchOption, String searchKey) {
 		//offset 0  은 0번째 이후의 행을 가져온다. 컨트롤러에서 0을 빼서 넘겨주었음
-		return sqlSession.selectList("member.list",start);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("start", start);
+		map.put("searchOption", searchOption);
+		map.put("searchKey", searchKey);
+		
+		return sqlSession.selectList("member.list",map);
 	}
 
 	//멤버 레코드 수를 알아온다. 
 	@Override
-	public int count() {
-		return sqlSession.selectOne("member.count");
+	public int count(String searchOption,String searchKey) {
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("searchOption", searchOption);
+		map.put("searchKey", searchKey);
+		
+		return sqlSession.selectOne("member.count",map);
 	}
 	
 	//아이디 중복 여부 확인 

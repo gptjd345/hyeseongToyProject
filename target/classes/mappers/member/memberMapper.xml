@@ -13,13 +13,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id = "list" resultType="com.example.toyProject.model.member.dto.MemberDTO">
-		select * from member order by joindate desc
+		select * from member
+			<include refid="search"/>
+					 order by joindate desc
 								offset #{start} rows fetch next 10 rows only
 	</select>
 	
+	<!-- 총 레코드 수를 출력한다. -->
 	<select id = "count" resultType="Integer">
-		select count(*) from member
+		select count(*) from member 
+			<include refid="search"/>
 	</select>
+	
+	<!-- 검색을 위한 옵션 처리  sql -->
+	<sql id="search">
+		<choose>
+				<when test="searchOption == 'all' || searchOption == 'none'">
+					where membernum like '%'||#{searchKey}||'%'
+					 or userid like '%'||#{searchKey}||'%'
+					 	or name like '%'||#{searchKey}||'%' 
+				</when>
+				<otherwise>
+					where ${searchOption} like '%'||#{searchKey}||'%'
+				</otherwise>
+			</choose>
+	</sql>
 	
 	<!-- 아이디 중복 여부 체크 -->
 	<select id = "idCheck" resultType="Integer" parameterType="String">

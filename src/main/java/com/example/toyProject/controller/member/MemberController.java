@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.toyProject.model.member.dto.MemberDTO;
+import com.example.toyProject.model.member.dto.PageDTO;
 import com.example.toyProject.service.member.MemberService;
 
 @Controller
@@ -57,20 +58,29 @@ public class MemberController {
 	
 	
 	@RequestMapping("list.do")
-	public ModelAndView list(@RequestParam(defaultValue = "1") int curBlock)
+	public ModelAndView list(@ModelAttribute PageDTO pageDTO)
 	{
 		
 		//전체 레코드 수 알아옴
-		int totalPage = memberService.count();
+		int totalPage = memberService.count(pageDTO.getSearchOption(),pageDTO.getSearchKey());
 		
 		//찾아올 시작 레코드 = 현재 블록 * 10 - 10 이다. 10은 한블록에 있는 레코드 수 
 		//offset은 쓰여진 숫자 다음 레코드를 가져오니 9가 아닌 10을 빼준다.
-		int start = (curBlock * 10) - 10;
+		int start = (pageDTO.getCurBlock() * 10) - 10;
+		
+		//해당 블록에 레코드가 없다면 0부터 찾고 curBlock은 1로 한다.  
+		if(start > totalPage)
+		{	
+			start = 0;
+			pageDTO.setCurBlock(1);
+		}
+		
+		List<MemberDTO> list = memberService.list(start,pageDTO.getSearchOption(),pageDTO.getSearchKey());
 		
 		System.out.println("totalPage = "+totalPage);
-		
-		List<MemberDTO> list = memberService.list(start);
-		System.out.println("curBlock:"+curBlock);
+		System.out.println("curBlock:"+pageDTO.getCurBlock());
+		System.out.println("searchOption:"+pageDTO.getSearchOption());
+		System.out.println("searchKey:"+pageDTO.getSearchKey());
 		System.out.println("start:"+start);
 		System.out.println("list:"+list);
 		
@@ -83,7 +93,8 @@ public class MemberController {
 		mav.setViewName("member/list");
 		mav.addObject("list",list);
 		mav.addObject("totalPage",totalPage);
-		mav.addObject("curBlock",curBlock);
+		mav.addObject("pageDTO",pageDTO);
+		
 		return mav;
 		
 	}
@@ -137,7 +148,7 @@ public class MemberController {
 	
 	//회원 수정 창 가져오기 GET
 	@RequestMapping(value="/modify", method = RequestMethod.GET)
-	public ModelAndView modify(@RequestParam String userid, @RequestParam int curBlock)
+	public ModelAndView modify(@RequestParam String userid, @ModelAttribute PageDTO pageDTO)
 	{
 		//수정할 회원 정보 가져오기
 		MemberDTO dto = memberService.getModifyInfo(userid);
@@ -146,7 +157,8 @@ public class MemberController {
 		mav.setViewName("/member/modify");
 		//수정창은 해당 아이디와 수정창으로 넘어오기전 블록 번호를 가지고있다.
 		mav.addObject("dto",dto);
-		mav.addObject("curBlock",curBlock);
+		mav.addObject("pageDTO",pageDTO);
+		
 		
 		return mav;
 	}

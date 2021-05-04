@@ -8,10 +8,10 @@ public interface MemberDAO {
 	 
 	 MemberDTO login_Check(MemberDTO dto);
 	
-	 List<MemberDTO> list(int start);
+	 List<MemberDTO> list(int start, String searchOption, String searchKey);
 	
 	 //멤버 레코드 수를 받아옴 
-	 int count();
+	 int count(String searchOption,String searchKey);
 	 
 	 //아이디 중복여부 확인 
 	 int idCheck(String userid);
