@@ -1,6 +1,5 @@
 package com.example.toyProject.controller.member;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,13 +30,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="login.do" ,method = RequestMethod.POST)
-	public String login_check(@ModelAttribute MemberDTO dto, HttpSession session)
+	public @ResponseBody String login_check(@ModelAttribute MemberDTO dto, HttpSession session)
 	{
+		System.out.println("dto: "+dto);
+		MemberDTO result = memberService.login_Check(dto, session);
 		//로그인 성공시 만들어진 객체가 null 이 아닌 경우 
-		if(memberService.login_Check(dto, session) != null)
-			return "redirect:/";
+		if(result != null)
+			return "success";
 		else
-			return "/member/login";
+			return "fail";
 	}
 	
 	@RequestMapping("logout.do")

@@ -82,7 +82,7 @@
                                             <input type="checkbox" id="f-option" name="selector">
                                             <label for="f-option">Remember me</label>
                                         </div>
-                                        <button type="submit" class="btn_3" id="login">
+                                        <button type="button" class="btn_3" id="login">
                                             log in 
                                         </button>
                                         <a class="lost_pass" href="#">forget password?</a>
@@ -141,7 +141,7 @@
     <script src="/resources/assets/js/main.js"></script>
 
     <!--유효성 검사 -->
-    <script src="/resources/assets/js/toyProject/member/login.js?ver1.5"></script>
+    <script src="/resources/assets/js/toyProject/member/login.js?ver1.1"></script>
 
 </body>
     
