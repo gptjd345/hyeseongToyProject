@@ -35,19 +35,7 @@
 		
 			<beans:ref bean="LoginInterceptor"/>
 		</interceptor>
-		<interceptor>
-		 <mapping path="/*"/>
-		 
-		  <exclude-mapping path="/resources/**" />
-		 
-			<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
-			 <beans:property name="cacheSeconds" value="0"/>
-			 <beans:property name="useExpiresHeader" value="false"/>
-			 <beans:property name="useCacheControlHeader" value="false"/>
-			 <beans:property name="useCacheControlNoStore" value="false"/>
-			</beans:bean>
-
-		</interceptor>
+		
 		
 	</interceptors>
 	

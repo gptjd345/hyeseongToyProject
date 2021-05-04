@@ -4,26 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zxx">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Watch shop | eCommers</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
-    <!-- CSS here -->
-        <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/flaticon.css">
-        <link rel="stylesheet" href="/resources/assets/css/slicknav.css">
-        <link rel="stylesheet" href="/resources/assets/css/animate.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/magnific-popup.css">
-        <link rel="stylesheet" href="/resources/assets/css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/themify-icons.css">
-        <link rel="stylesheet" href="/resources/assets/css/slick.css">
-        <link rel="stylesheet" href="/resources/assets/css/nice-select.css">
-        <link rel="stylesheet" href="/resources/assets/css/style.css">
+    <!-- 기본적으로 사용하는 css 내용들  -->
+	<%@include file="../include/baseCss.jsp" %>
         
     <!-- Toy Project CSS-->    
         <link rel="stylesheet" href="/resources/assets/css/member/login.css">
@@ -106,40 +88,10 @@
     </div>
     <!-- Search model end -->
     
-    <!-- JS here -->
-    <script src="/resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <!-- Jquery, Popper, Bootstrap -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/resources/assets/js/popper.min.js"></script>
-    <script src="/resources/assets/js/bootstrap.min.js"></script>
-    <!-- Jquery Mobile Menu -->
-    <script src="/resources/assets/js/jquery.slicknav.min.js"></script>
-
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <script src="/resources/assets/js/owl.carousel.min.js"></script>
-    <script src="/resources/assets/js/slick.min.js"></script>
-
-    <!-- One Page, Animated-HeadLin -->
-    <script src="/resources/assets/js/wow.min.js"></script>
-    <script src="/resources/assets/js/animated.headline.js"></script>
-    
-    <!-- Scroll up, nice-select, sticky -->
-    <script src="/resources/assets/js/jquery.scrollUp.min.js"></script>
-    <script src="/resources/assets/js/jquery.nice-select.min.js"></script>
-    <script src="/resources/assets/js/jquery.sticky.js"></script>
-    <script src="/resources/assets/js/jquery.magnific-popup.js"></script>
-
-    <!-- contact js -->
-    <script src="/resources/assets/js/contact.js"></script>
-    <script src="/resources/assets/js/jquery.form.js"></script>
-    <script src="/resources/assets/js/jquery.validate.min.js"></script>
-    <script src="/resources/assets/js/mail-script.js"></script>
-    <script src="/resources/assets/js/jquery.ajaxchimp.min.js"></script>
-    
-    <!-- Jquery Plugins, main Jquery -->	
-    <script src="/resources/assets/js/plugins.js"></script>
-    <script src="/resources/assets/js/main.js"></script>
-
+   <!-- 기본적으로 사용하는 JS 내용들  -->
+	<%@include file="../include/baseJS.jsp" %>
+	
+	<!-- Toy Project JS -->
     <!--유효성 검사 -->
     <script src="/resources/assets/js/toyProject/member/login.js?ver1.1"></script>
 
