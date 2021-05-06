@@ -1,5 +1,7 @@
 package com.example.toyProject.controller.member;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -24,10 +26,16 @@ public class MemberController {
 	@Inject
 	MemberService memberService;
 	
-	@RequestMapping(value="login.do", method = RequestMethod.GET)
+	@RequestMapping("login")
 	public String login()
 	{
 		return "member/login";
+	}
+	
+	@RequestMapping(value="login.do", method= RequestMethod.GET)
+	public String preventLoginDo()
+	{
+		return "redirect:/member/login";
 	}
 	
 	@RequestMapping(value="login.do" ,method = RequestMethod.POST)
@@ -47,10 +55,10 @@ public class MemberController {
 	{
 		memberService.logout(session);
 		
-		return "redirect:/member/login.do";
+		return "redirect:/member/login";
 	}
 	
-	@RequestMapping(value="signUp.do", method = RequestMethod.GET)
+	@RequestMapping("signUp")
 	public String signUp()
 	{
 		return "member/signUp";
@@ -118,7 +126,7 @@ public class MemberController {
 		
 		memberService.signUp(dto);
 		
-		return "member/login";
+		return "redirect:/member/login";
 		
 	}
 	
@@ -135,15 +143,19 @@ public class MemberController {
 	
 	//회원 관리 창에서 회원 등록 및 수정 처리
 	@RequestMapping("/registModify.do")
-	public String regist(@ModelAttribute MemberDTO dto , @RequestParam int curBlock)
+	public String regist(@ModelAttribute MemberDTO dto , @ModelAttribute PageDTO pageDTO) throws UnsupportedEncodingException
 	{
 		System.out.print("등록전: "+ dto.toString()); 
-		System.out.println("curBlock : "+curBlock);
+		System.out.println("PageDTO : "+pageDTO);
 		
 		//회원가입시 사용했던 것을 사용
 		memberService.registModify(dto);
+		//URL에 한글이 입력되는 경우 에러가 발생한다. UTF-8 로 인코딩해야한다. 
+		String searchKey = URLEncoder.encode(pageDTO.getSearchKey(), "UTF-8");
 		
-		return "redirect:/member/list.do?curBlock="+curBlock;
+		return "redirect:/member/list.do?curBlock="+pageDTO.getCurBlock()+
+					"&searchOption="+pageDTO.getSearchOption()+"&searchKey="+searchKey;
+		
 	}
 	
 	//회원 수정 창 가져오기 GET

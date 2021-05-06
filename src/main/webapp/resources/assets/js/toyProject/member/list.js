@@ -20,7 +20,9 @@ $('#delete').click(function(e)
         {
             if(result == "success"){
             	alert("삭제 되었습니다.");
-                window.location.replace("/member/list.do?curBlock="+$('.curBlock').val());
+            	var uri = "/member/list.do?curBlock="+$('.curBlock').val()+"&searchOption="
+            				+$('.searchOption').val()+"&searchKey="+$('.searchKey').val();
+                window.location.replace(encodeURI(uri));
                 
             }
             else if(result == "fail"){

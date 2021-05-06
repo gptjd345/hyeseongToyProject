@@ -166,6 +166,8 @@
 	           
 	           <!-- 현재 페이지 블록값을 저장 -->   
 	           <input type="hidden" class="curBlock" name="curBlock" value="${pageDTO.curBlock}"/>
+	           <input type="hidden" class="searchOption" name="searcOption" value="${pageDTO.searchOption}"/>
+	           <input type="hidden" class="searchKey" name="searchKey" value="${pageDTO.searchKey}"/>
 	           
               
               <div class="btn_Container">
@@ -196,7 +198,7 @@
 	
 	<!-- Toy Project JS -->
 
-	<script src="/resources/assets/js/toyProject/member/list.js?ver1.5"></script>
+	<script src="/resources/assets/js/toyProject/member/list.js?ver1.1"></script>
 	
 
 

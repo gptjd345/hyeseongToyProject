@@ -7,7 +7,7 @@
 	<%@include file="../include/baseCss.jsp" %>
      
     <!-- ToyProject CSS 추후에 -->
-    <link rel="stylesheet" href="/resources/assets/css/member/signUp.css">        
+    <link rel="stylesheet" href="/resources/assets/css/member/signUp.css?version=1.2">        
 </head>
 <body>
     <header>
@@ -98,7 +98,7 @@
 	<%@include file="../include/baseJS.jsp" %>
 
     <!-- toyProject -->
-    <script src="/resources/assets/js/toyProject/member/signUp.js?version=1.2"></script>
+    <script src="/resources/assets/js/toyProject/member/signUp.js?version=1.0"></script>
 
 </body>
     

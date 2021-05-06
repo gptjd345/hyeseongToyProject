@@ -23,7 +23,7 @@ var pwValidate = function() {
 var pwValidate2 = function() {
     var PW2 = $("#password2").val().trim();
 
-    if(PW2 == $("#password").val().trim())
+    if(PW2 != "" && PW2 == $("#password").val().trim())
     {
         $("#password2").nextAll("*").remove();
         $("#password2").after('<span class="success">성공</span>');
@@ -70,8 +70,6 @@ var phoneValidate = function() {
 
 /* --- 입력필드에 blur 이벤트가 실행될 경우 유효성 검사를 진행한다. --- */ 
 
-//id 유효성 검사 
-$('#userid').blur(idValidate);
 
 //비밀번호 유효성 검사 
 $('#password').blur(pwValidate);

@@ -46,7 +46,7 @@ var pwValidate = function() {
     if(!pwCheck.test(PW))
     {
         $("#password").nextAll("*").remove();
-        $("#password").after('<span class="fail"> 8 ~ 16 자 사이의 영문 대소문자, 숫자, 특수문자를 조합해주세요. </span>');
+        $("#password").after('<span class="fail"> 8~16자 영문 대 소문자, 숫자, 특수문자를 조합해주세요. </span>');
     }
     else{
         $("#password").nextAll("*").remove();
@@ -59,14 +59,14 @@ var pwValidate = function() {
 var pwValidate2 = function() {
     var PW2 = $("#password2").val().trim();
 
-    if(PW2 == $("#password").val().trim())
+    if(PW2 != "" && PW2 == $("#password").val().trim())
     {
         $("#password2").nextAll("*").remove();
         $("#password2").after('<span class="success">성공</span>');
     }
     else{
         $("#password2").nextAll("*").remove();
-        $("#password2").after('<span class="fail">비밀번호를 다시 확인해주세요. </span>');
+        $("#password2").after('<span class="fail">비밀번호가 일치하지 않습니다. </span>');
     }
 }
 

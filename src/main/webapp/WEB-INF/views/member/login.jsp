@@ -41,7 +41,7 @@
                                 <h2>New to our Shop?</h2>
                                 <p>There are advances being made in science and technology
                                     everyday, and a good example of this is the</p>
-                                <a href="signUp.do" class="btn_3">Create an Account</a>
+                                <a href="signUp" class="btn_3">Create an Account</a>
                             </div>
                         </div>
                     </div>
@@ -61,13 +61,13 @@
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <div class="creat_account d-flex align-items-center">
-                                            <input type="checkbox" id="f-option" name="selector">
-                                            <label for="f-option">Remember me</label>
+                                            <!-- <input type="checkbox" id="f-option" name="selector">
+                                            <label for="f-option">Remember me</label> -->
                                         </div>
                                         <button type="button" class="btn_3" id="login">
                                             log in 
                                         </button>
-                                        <a class="lost_pass" href="#">forget password?</a>
+                                        <!-- <a class="lost_pass" href="#">forget password?</a> -->
                                     </div>
                                 </form>
                             </div>
@@ -93,7 +93,7 @@
 	
 	<!-- Toy Project JS -->
     <!--유효성 검사 -->
-    <script src="/resources/assets/js/toyProject/member/login.js?ver1.1"></script>
+    <script src="/resources/assets/js/toyProject/member/login.js?ver1.2"></script>
 
 </body>
     

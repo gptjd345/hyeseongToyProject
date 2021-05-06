@@ -23,13 +23,13 @@
                             <ul>
                                 <li>
                                     <div class="nav-search search-switch">
-                                        <span class="flaticon-search"></span>
+                                        
                                     </div>
                                 </li>
                                 
                                 <c:set var="userid" value="${sessionScope.resultDTO.userid}"/>
                                 <c:if test="${userid == null}">
-                                	<li> <a href="${path}/member/login.do"><span class="flaticon-user"></span></a></li>
+                                	<li> <a href="${path}/member/login"><span class="flaticon-user"></span></a></li>
                                 </c:if>
                                 <c:if test="${userid != null}">
                                 	<li>

@@ -7,7 +7,7 @@
 	<%@include file="../include/baseCss.jsp" %>
      
     <!-- ToyProject CSS 추후에 -->
-    <link rel="stylesheet" href="/resources/assets/css/member/signUp.css">        
+    <link rel="stylesheet" href="/resources/assets/css/member/signUp.css?version=1.0">        
 </head>
 <body>
     <header>
@@ -58,10 +58,11 @@
 	                                    <div class="col-md-12 form-group p_star">
 	                                        <input type="text" class="form-control" id="phonenum" name="phonenum" value="${dto.phonenum}" placeholder="PhoneNumber : 010-1234-5678">
 	                                    </div>
-											
-											<input type="hidden" name="curBlock" value="${curBlock}"/>
-											<!-- curBlock으로 통일 -->
-											<c:set var="curBlock" value="${curBlock}"/>
+											<!-- 수정완료시 페이지 관련 정보들을 그대로 전달하여 원래 페이지로 이동할 수 있게 한다.   -->
+											<input type="hidden" name="curBlock" value="${pageDTO.curBlock}"/>
+											<input type="hidden" name="searchOption" value="${pageDTO.searchOption}"/>
+											<input type="hidden" name="searchKey" value="${pageDTO.searchKey}"/>
+					
 											
 	                                    <div class="col-md-12 form-group">
 	                                        <button type="submit" value="submit" class="btn_3" id="signUp">
@@ -102,7 +103,7 @@
 	<%@include file="../include/baseJS.jsp" %>
 
     <!-- toyProject -->
-    <script src="/resources/assets/js/toyProject/member/modify.js?version=1.0"></script>
+    <script src="/resources/assets/js/toyProject/member/modify.js?version=1.1"></script>
 
 </body>
     
