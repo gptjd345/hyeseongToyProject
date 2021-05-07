@@ -172,7 +172,7 @@
               
               <div class="btn_Container">
               
-                  <a href="./registration?curBlock=${pageDTO.curBlock}" class="btn_1" id="register-form">등록</a>
+                  <a href="./registration?curBlock=${pageDTO.curBlock}&searchOption=${pageDTO.searchOption}&searchKey=${pageDTO.searchKey}" class="btn_1" id="register-form">등록</a>
                   <button type="button" class="btn_1" id="delete">삭제</button>
           
               </div>

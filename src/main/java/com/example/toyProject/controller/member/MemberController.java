@@ -132,10 +132,10 @@ public class MemberController {
 	
 	//회원 등록 창 요청 처리
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
-	public ModelAndView manage(@RequestParam int curBlock)
+	public ModelAndView manage(@ModelAttribute PageDTO pageDTO)
 	{
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("curBlock",curBlock);
+		mav.addObject("pageDTO",pageDTO);
 		mav.setViewName("/member/registration");
 		
 		return mav;

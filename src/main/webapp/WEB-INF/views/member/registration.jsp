@@ -7,7 +7,7 @@
 	<%@include file="../include/baseCss.jsp" %>
      
     <!-- ToyProject CSS 추후에 -->
-    <link rel="stylesheet" href="/resources/assets/css/member/signUp.css">        
+    <link rel="stylesheet" href="/resources/assets/css/member/signUp.css?version=1.0">        
 </head>
 <body>
     <header>
@@ -59,7 +59,10 @@
                                         <input type="text" class="form-control" id="phonenum" name="phonenum" value="" placeholder="PhoneNumber : 010-1234-5678">
                                     </div>
                                     
-                                    <input type="hidden" name="curBlock" value="${curBlock}"/>
+                                    <!-- 현재 페이지 블록값을 저장 -->   
+						           <input type="hidden" class="curBlock" name="curBlock" value="${pageDTO.curBlock}"/>
+						           <input type="hidden" class="searchOption" name="searcOption" value="${pageDTO.searchOption}"/>
+						           <input type="hidden" class="searchKey" name="searchKey" value="${pageDTO.searchKey}"/>
                                     
                                     <div class="col-md-12 form-group">
 	                                        <button type="submit" value="submit" class="btn_3" id="signUp">
@@ -76,7 +79,7 @@
                         <div class="login_part_text text-center">
                             <div class="login_part_text_iner">
                                 <h2>Welcome !!</h2>
-                                <a href="./list.do?curBlock=${curBlock}" class="btn_3">Go List Page</a>
+                                <a href="./list.do?curBlock=${pageDTO.curBlock}&searchOption=${pageDTO.searchOption}&searchKey=${pageDTO.searchKey}" class="btn_3">Go List Page</a>
                             </div>
                         </div>
                     </div>
