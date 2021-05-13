@@ -1,7 +1,5 @@
 package com.example.toyProject.controller.member;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,7 +19,8 @@ import com.example.toyProject.service.member.MemberService;
 
 @Controller
 @RequestMapping("/member/*")
-public class MemberController {
+public class MemberController 
+{
 	
 	@Inject
 	MemberService memberService;
@@ -39,15 +38,27 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="login.do" ,method = RequestMethod.POST)
-	public @ResponseBody String login_check(@ModelAttribute MemberDTO dto, HttpSession session)
+	public ModelAndView login_check(@ModelAttribute MemberDTO dto, HttpSession session)
 	{
 		System.out.println("dto: "+dto);
 		MemberDTO result = memberService.login_Check(dto, session);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("alert");
+		
 		//로그인 성공시 만들어진 객체가 null 이 아닌 경우 
 		if(result != null)
-			return "success";
+		{	
+			mav.addObject("msg", "로그인에 성공하였습니다.");
+			mav.addObject("url", "/");
+			return mav;
+		}	
 		else
-			return "fail";
+		{	
+			mav.addObject("msg", "아이디 또는 비밀번호를 확인해주세요. ");
+			mav.addObject("url", "/member/login");
+			return mav;
+		}
 	}
 	
 	@RequestMapping("logout.do")
@@ -58,13 +69,7 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
-	@RequestMapping("signUp")
-	public String signUp()
-	{
-		return "member/signUp";
-	}
-	
-	
+
 	@RequestMapping("list.do")
 	public ModelAndView list(@ModelAttribute PageDTO pageDTO)
 	{
@@ -76,25 +81,21 @@ public class MemberController {
 		//offset은 쓰여진 숫자 다음 레코드를 가져오니 9가 아닌 10을 빼준다.
 		int start = (pageDTO.getCurBlock() * 10) - 10;
 		
-		//해당 블록에 레코드가 없다면 0부터 찾고 curBlock은 1로 한다.  
-		if(start > totalPage)
-		{	
-			start = 0;
-			pageDTO.setCurBlock(1);
-		}
+		//해당 블록에 레코드가 없다면 없는 페이지를 보여준다.   
 		
 		List<MemberDTO> list = memberService.list(start,pageDTO.getSearchOption(),pageDTO.getSearchKey());
 		
-		System.out.println("totalPage = "+totalPage);
+	/*	System.out.println("totalPage = "+totalPage);
 		System.out.println("curBlock:"+pageDTO.getCurBlock());
 		System.out.println("searchOption:"+pageDTO.getSearchOption());
 		System.out.println("searchKey:"+pageDTO.getSearchKey());
 		System.out.println("start:"+start);
 		System.out.println("list:"+list);
 		
-//		기본적으로 	ArrayList 를 사용한다. 	
-//		System.out.println(list instanceof ArrayList);
-//		System.out.println(list instanceof LinkedList);
+		기본적으로 	ArrayList 를 사용한다. 	
+		System.out.println(list instanceof ArrayList);
+		System.out.println(list instanceof LinkedList);
+	 */
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -118,43 +119,57 @@ public class MemberController {
 		return result;
 	}
 	
+	//회원 가입 창 
+	@RequestMapping("signUp")
+	public String signUp()
+	{
+		return "member/signUp";
+	}
+	
 	//회원가입 처리
 	@RequestMapping(value="/signUp.do", method = RequestMethod.POST)
-	public String signUp(@ModelAttribute MemberDTO dto)
+	public ModelAndView signUp(@ModelAttribute MemberDTO dto)
 	{
-		dto.toString();
+		System.out.println("회원 가입 전:"+dto.toString());
 		
 		memberService.signUp(dto);
 		
-		return "redirect:/member/login";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("alert");
+		mav.addObject("msg", "회원 가입 되었습니다. ");
+		mav.addObject("url", "/member/login");
+		
+		return mav;
 		
 	}
 	
 	//회원 등록 창 요청 처리
-	@RequestMapping(value="/registration", method = RequestMethod.GET)
+	@RequestMapping(value="/regist", method = RequestMethod.GET)
 	public ModelAndView manage(@ModelAttribute PageDTO pageDTO)
 	{
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/regist");
 		mav.addObject("pageDTO",pageDTO);
-		mav.setViewName("/member/registration");
 		
 		return mav;
 	}
 	
-	//회원 관리 창에서 회원 등록 및 수정 처리
-	@RequestMapping("/registModify.do")
-	public String regist(@ModelAttribute MemberDTO dto , @ModelAttribute PageDTO pageDTO) throws UnsupportedEncodingException
+	//회원 등록 처리
+	@RequestMapping("/regist.do")
+	public ModelAndView regist(@ModelAttribute MemberDTO dto , @ModelAttribute PageDTO pageDTO)
 	{
-		System.out.print("등록전: "+ dto.toString()); 
-		System.out.println("PageDTO : "+pageDTO);
+		System.out.print("회원 등록 전: "+ dto.toString()); 
+		System.out.println("회원 등록 --> PageDTO : "+pageDTO);
 		
-		//회원가입시 사용했던 것을 사용
-		memberService.registModify(dto);
-		//URL에 한글이 입력되는 경우 에러가 발생한다. UTF-8 로 인코딩해야한다. 
-		String searchKey = URLEncoder.encode(pageDTO.getSearchKey(), "UTF-8");
+		memberService.regist(dto);
 		
-		return "redirect:/member/list.do?curBlock="+pageDTO.getCurBlock()+
-					"&searchOption="+pageDTO.getSearchOption()+"&searchKey="+searchKey;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("alert");
+		mav.addObject("msg", "등록 되었습니다. ");
+		mav.addObject("url", "/member/list.do?curBlock="+pageDTO.getCurBlock()+
+				"&searchOption="+pageDTO.getSearchOption()+"&searchKey="+pageDTO.getSearchKey());
+		
+		return mav;
 		
 	}
 	
@@ -175,14 +190,40 @@ public class MemberController {
 		return mav;
 	}
 	
+	//회원 수정 처리
+	@RequestMapping("/modify.do")
+	public ModelAndView modify(@ModelAttribute MemberDTO dto , @ModelAttribute PageDTO pageDTO)
+	{
+		System.out.print("회원 수정 전: "+ dto.toString()); 
+		System.out.println("회원 수정 --> PageDTO : "+pageDTO);
+		
+		memberService.modify(dto);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("alert");
+		mav.addObject("msg", "수정되었습니다. ");
+		mav.addObject("url", "/member/list.do?curBlock="+pageDTO.getCurBlock()+
+				"&searchOption="+pageDTO.getSearchOption()+"&searchKey="+pageDTO.getSearchKey());
+		
+		return mav;
+		
+	}
+	
 	//회원 삭제 수행
 	@RequestMapping("/delete.do")
-	public @ResponseBody String delete(@RequestParam List<String> selectedRow)
+	public ModelAndView delete(@RequestParam List<String> list, @ModelAttribute PageDTO pageDTO)
 	{
-		System.out.println("selectedRow : "+selectedRow);
-		memberService.delete(selectedRow);
+		System.out.println("회원 삭제할 리스트(아이디) : "+list);
+		memberService.delete(list);
 		
-		return "success";
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("alert");
+		mav.addObject("msg", "삭제되었습니다. ");
+		mav.addObject("url", "/member/list.do?curBlock="+pageDTO.getCurBlock()+
+					"&searchOption="+pageDTO.getSearchOption()+"&searchKey="+pageDTO.getSearchKey());
+		
+		return mav;
 	}
 	
 	

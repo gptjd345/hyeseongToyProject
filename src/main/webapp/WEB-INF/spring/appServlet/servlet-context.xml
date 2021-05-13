@@ -24,6 +24,7 @@
 	<context:component-scan base-package="com.example.toyProject" />
 	
 	<!-- 로그인 인터셉터 빈을 서블릿 컨테이너에 등록한다.  -->
+	<!-- 
 	<beans:bean id="LoginInterceptor" class="com.example.toyProject.Interceptor.LoginInterceptor"/>
 	
 	<interceptors>
@@ -37,7 +38,7 @@
 		</interceptor>
 		
 		
-	</interceptors>
+	</interceptors> -->
 	
 	
 	

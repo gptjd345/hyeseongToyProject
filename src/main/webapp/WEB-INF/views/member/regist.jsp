@@ -42,7 +42,7 @@
                                 <h3> <br>
                                     Please fill your info up</h3>
                                     
-                                <form class="row contact_form" action="./registModify.do" method="post" novalidate="novalidate" id= "registration-form" >
+                                <form class="row contact_form" action="./regist.do" method="post" novalidate="novalidate" id= "registration-form" >
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="userid" name="userid" value="" placeholder="User ID">
                                     </div>
@@ -104,7 +104,7 @@
 	<%@include file="../include/baseJS.jsp" %>
 
     <!-- toyProject -->
-    <script src="/resources/assets/js/toyProject/member/signUp.js?version=1.2"></script>
+    <script src="/resources/assets/js/toyProject/member/signUp.js?version=1.3"></script>
 
 </body>
     

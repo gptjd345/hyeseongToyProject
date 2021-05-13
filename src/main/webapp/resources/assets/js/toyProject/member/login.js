@@ -51,24 +51,7 @@ $('#login').click(function(e)
 
     if(idValidate() && pwValidate())
     {
-    	$.ajax({
-    		url: "/member/login.do",
-    		type : "post",
-    		data : $('#login-form').serialize(),
-    		dataType: "text",
-    		success: function(result)
-    		{
-    			if(result == "success")
-    			{	alert("로그인 되었습니다.");
-    				window.location.replace('/'); 
-    			}
-    			else
-    			{
-    				alert("아이디와 비밀번호를 확인하세요.")
-    				
-    			}
-    		}
-    			});
+    	$('#login-form').submit();
     }
     else if( !idValidate() )
     {

@@ -2,7 +2,8 @@
 //유효성 검사 후 성공 글씨는 나중에 지울 것 !!
 
 //id 유효성 검사 함수 
-var idValidate = function(){
+var idValidate = function()
+{
     var ID = $('#userid').val().trim();
     
     var IdCheck = RegExp(/^[a-zA-Z0-9]{5,16}$/);
@@ -38,7 +39,8 @@ var idValidate = function(){
 };
 
 //비밀번호 유효성 검사 함수 
-var pwValidate = function() {
+var pwValidate = function() 
+{
     var PW = $("#password").val().trim();
 
     var pwCheck = RegExp(/^(?=.*[a-zA-Z])(?=.*[`~!@#$%^&*()+=-?])(?=.*\d).{8,16}$/);
@@ -56,7 +58,8 @@ var pwValidate = function() {
 }
 
 //비밀번호 확인 유효성 검사 함수 
-var pwValidate2 = function() {
+var pwValidate2 = function() 
+{
     var PW2 = $("#password2").val().trim();
 
     if(PW2 != "" && PW2 == $("#password").val().trim())
@@ -71,7 +74,8 @@ var pwValidate2 = function() {
 }
 
 //이름 확인 유효성 검사 함수
-var nameValidate = function() {
+var nameValidate = function() 
+{
     var Name = $("#name").val().trim();
     // (?:x|y) x와 y중 하나  이거 안쓰면 앞검사통과하면 뒤에 검사 진행하지 않는다. 
     var pwCheck = RegExp(/^(?:([가-힣]{2,4})|([a-zA-Z]{3,16}))$/);
@@ -88,7 +92,8 @@ var nameValidate = function() {
 }
 
 //전화번호 유효성 검사 함수
-var phoneValidate = function() {
+var phoneValidate = function() 
+{
 	//사용자가 하이픈 처리를 신경쓰지 않아도 되도록한다. 
     var phoneCheck = RegExp(/^01[016789]-?(\d{3,4})-?(\d{4})$/); 
     var phonenum = $("#phonenum").val().trim();
@@ -142,17 +147,14 @@ $("#signUp").click(function(e)
     //전화번호 유효성 검사
     phoneValidate();
 
-    //fail span 태그가 하나도 없으면 통과 기본이벤트 진행 
-    if($('.fail').length == 0 )
-    {
-        window.alert("회원가입이 완료 되었습니다.");
-    }
-    else
+    
+    if($('.fail').length != 0 )
     {
     	//기본이벤트를 막는다. 
         e.preventDefault();
     }
-
+   
+    //fail span 태그가 하나도 없으면 통과 기본이벤트 진행 
     
 }); 
 

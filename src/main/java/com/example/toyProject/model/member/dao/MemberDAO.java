@@ -22,9 +22,15 @@ public interface MemberDAO {
 	 //회원 정보 수정창에 가져올 정보
 	 MemberDTO getModifyInfo(String userid);
 	 
-	 //회원정보 등록 수정 
-	 void registModify(MemberDTO dto);
+	 //회원정보 등록 
+	 void regist(MemberDTO dto);
+	 
+	 //회원정보 수정
+	 void modify(MemberDTO dto);
 	 
 	 //회원 정보 삭제
-	 void delete(List<String> selectedRow);
+	 void delete(List<String> list);
+	 
+	 //스프링 시큐리티에서 사용할 메소드 나중에 개선
+	 MemberDTO getUserById(String userid);
 }

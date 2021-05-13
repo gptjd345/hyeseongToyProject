@@ -6,6 +6,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.toyProject.model.member.dao.MemberDAO;
@@ -70,19 +73,30 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.getModifyInfo(userid);
 	}
 	
-	//회원 정보 등록 수정처리
+	//회원 정보 등록처리
 	@Override
-	public void registModify(MemberDTO dto)
+	public void regist(MemberDTO dto)
 	{
-		memberDAO.registModify(dto);
+		memberDAO.regist(dto);
 		
 	}
 	
-	//회원 정보 삭제 처리 
+	//회원 정보 수정처리
 	@Override
-	public void delete(List<String> selectedRow) {
-		memberDAO.delete(selectedRow);
+	public void modify(MemberDTO dto)
+	{
+		memberDAO.modify(dto);
 		
 	}
+	
+	
+	//회원 정보 삭제 처리 
+	@Override
+	public void delete(List<String> list) {
+		memberDAO.delete(list);
+		
+	}
+	
+	
 
 }

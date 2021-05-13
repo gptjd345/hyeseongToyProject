@@ -101,16 +101,15 @@ $("#signUp").click(function(e)
     //전화번호 유효성 검사
     phoneValidate();
 
-    //fail span 태그가 하나도 없으면 통과 기본이벤트 진행 
-    if($('.fail').length == 0 )
-    {
-        window.alert("회원가입이 완료 되었습니다.");
-    }
-    else
+    
+    
+    if($('.fail').length != 0 )
     {
     	//기본이벤트를 막는다. 
         e.preventDefault();
     }
+   
+    //fail span 태그가 하나도 없으면 통과 기본이벤트 진행 
 
     
 }); 

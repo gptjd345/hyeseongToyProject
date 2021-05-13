@@ -42,7 +42,7 @@
                                 <h3> <br>
                                     Please fill your info up</h3>
                                                                  
-                                  	<form class="row contact_form" action="./registModify.do" method="post" novalidate="novalidate" id= "registration-form">
+                                  	<form class="row contact_form" action="./modify.do" method="post" id="registration-form">
 	                                  		 <div class="col-md-12 form-group p_star">
 	                                        <input type="text" class="form-control" id="userid" name="userid" value="${dto.userid}" readonly>
 	                                    </div>
@@ -70,6 +70,7 @@
 	                                        </button>
 	                                    </div>
 	                                </form>
+	                                
                             </div>
                         </div>
                     </div>
@@ -103,7 +104,7 @@
 	<%@include file="../include/baseJS.jsp" %>
 
     <!-- toyProject -->
-    <script src="/resources/assets/js/toyProject/member/modify.js?version=1.1"></script>
+    <script src="/resources/assets/js/toyProject/member/modify.js?version=1.0"></script>
 
 </body>
     

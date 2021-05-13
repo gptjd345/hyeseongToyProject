@@ -118,7 +118,13 @@
 	                        <td>${row.membernum}</td>
 	                        <td><a href="./modify?userid=${row.userid}&curBlock=${pageDTO.curBlock}&searchOption=${pageDTO.searchOption}&searchKey=${pageDTO.searchKey}">${row.userid}</a></td>
 	                        <td>${row.name}</td>
-	                        <td>${row.phonenum}</td>
+	                        <td><!-- 전화번호 입력 시 하이픈을 입력안하고 입력할수있으니 아예 없애고 보여줄때 붙여서 보여주는 방식으로 적용한다. -->
+	                        	<c:set var="phonenum" value="${fn:replace(row.phonenum,'-','')}"/>
+	                        	<c:set var="firstnum" value="${fn:substring(phonenum, 0, 3)}"/>
+	                        	<c:set var="middlenum" value="${fn:substring(phonenum, 3, fn:length(phonenum)-4)}"/>
+	                        	<c:set var="lastnum" value="${fn:substring(phonenum, fn:length(phonenum)-4, fn:length(phonenum))}"/>
+								<c:out value="${firstnum}-${middlenum}-${lastnum}"/>
+	                        </td>
 	                        <td><fmt:formatDate value = "${row.joindate}" pattern="yyyy-MM-dd HH:mm" /></td> <!-- 날짜의 출력형식을 변경 -->
 	                    </tr>
 	                </c:forEach>  
@@ -163,19 +169,20 @@
 	                	</c:otherwise>
 	                </c:choose>	
 	              </nav>
-	           
-	           <!-- 현재 페이지 블록값을 저장 -->   
-	           <input type="hidden" class="curBlock" name="curBlock" value="${pageDTO.curBlock}"/>
-	           <input type="hidden" class="searchOption" name="searcOption" value="${pageDTO.searchOption}"/>
-	           <input type="hidden" class="searchKey" name="searchKey" value="${pageDTO.searchKey}"/>
-	           
-              
-              <div class="btn_Container">
-              
-                  <a href="./registration?curBlock=${pageDTO.curBlock}&searchOption=${pageDTO.searchOption}&searchKey=${pageDTO.searchKey}" class="btn_1" id="register-form">등록</a>
-                  <button type="button" class="btn_1" id="delete">삭제</button>
-          
-              </div>
+	          <form action="delete.do" method="post" id="deleteForm"> 
+		           <!-- 현재 페이지 블록값을 저장 -->   
+		           <input type="hidden" class="curBlock" name="curBlock" value="${pageDTO.curBlock}"/>
+		           <input type="hidden" class="searchOption" name="searcOption" value="${pageDTO.searchOption}"/>
+		           <input type="hidden" class="searchKey" name="searchKey" value="${pageDTO.searchKey}"/>
+		           
+		             
+		             <div class="btn_Container">
+		             
+		                 <a href="./regist?curBlock=${pageDTO.curBlock}&searchOption=${pageDTO.searchOption}&searchKey=${pageDTO.searchKey}" class="btn_1" id="register-form">등록</a>
+		                 <button type="button" class="btn_1" id="delete">삭제</button>
+		         
+		             </div>
+              </form>
               
       </section>
       <!--================End Cart Area =================-->
@@ -190,6 +197,7 @@
       </div>
   </div>
   <!-- Search model end -->
+  
 
   <!-- JS here -->
   
@@ -198,7 +206,7 @@
 	
 	<!-- Toy Project JS -->
 
-	<script src="/resources/assets/js/toyProject/member/list.js?ver1.1"></script>
+	<script src="/resources/assets/js/toyProject/member/list.js?ver1.8"></script>
 	
 
 

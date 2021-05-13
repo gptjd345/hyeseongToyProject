@@ -50,7 +50,7 @@
                             <div class="login_part_form_iner">
                                 <h3>Welcome Back ! <br>
                                     Please Sign in now</h3>
-                                <form class="row contact_form" id="login-form" action="/member/login.do" method="post" novalidate="novalidate">
+                                <form class="row contact_form" id="login-form" action="/member/login.do" method="post">
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="userid" name="userid" value=""
                                             placeholder="User ID">
@@ -67,6 +67,8 @@
                                         <button type="button" class="btn_3" id="login">
                                             log in 
                                         </button>
+                                        <!-- 로그인 실패시 출력할 메세지 -->
+                                        <span class="fail">${requestScope.loginFailMsg}</span>
                                         <!-- <a class="lost_pass" href="#">forget password?</a> -->
                                     </div>
                                 </form>
@@ -93,7 +95,7 @@
 	
 	<!-- Toy Project JS -->
     <!--유효성 검사 -->
-    <script src="/resources/assets/js/toyProject/member/login.js?ver1.2"></script>
+    <script src="/resources/assets/js/toyProject/member/login.js?ver1.0"></script>
 
 </body>
     

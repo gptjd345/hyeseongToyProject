@@ -70,19 +70,33 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.getModifyInfo",userid);
 	}
 	
-	//회원 등록 및 수정 처리
+	//회원 등록 처리
 	@Override
-	public void registModify(MemberDTO dto)
+	public void regist(MemberDTO dto)
 	{
-		sqlSession.selectOne("member.registModify",dto);
+		sqlSession.selectOne("member.regist",dto);
+	}
+	
+	//회원 등록 처리
+	@Override
+	public void modify(MemberDTO dto)
+	{
+		sqlSession.selectOne("member.modify",dto);
 	}
 	
 	//회원 삭제 처리
 	@Override
-	public void delete(List<String> selectedRow) {
+	public void delete(List<String> list) {
 		//DAO까지 잘가나 확인 
-		System.out.println("listDAO: "+selectedRow);
-		sqlSession.selectOne("member.delete",selectedRow);
+		System.out.println("listDAO: "+list);
+		sqlSession.selectOne("member.delete",list);
+	}
+	
+	//스프링 시큐리티에서 사용할 메소드 나중에 개선
+	@Override
+	public MemberDTO getUserById(String userid) {
+		
+		return sqlSession.selectOne("member.getUserById", userid);
 	}
 	
 	
