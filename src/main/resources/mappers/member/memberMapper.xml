@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id = "list" resultType="com.example.toyProject.model.member.dto.MemberDTO">
-		select * from member
+		select membernum, userid, password, name, phonenum, joindate from member
 			<choose>
 				<when test="searchOption == 'all' || searchOption == 'none'">
 					where membernum like '%'||#{searchKey}||'%'
@@ -80,10 +80,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			
 	</delete>
 	
-	<!-- 스프링 시큐리티에서 유저 정보 받아오는 sql 나중에 개선 -->
-	<select id="getUserById">
-		select membernum, userid, password, name, phonenum, joindate, authority from member where userid = #{userid}
-	</select>
+	 <!-- 스프링 시큐리티에서 유저 정보 받아오는 sql 나중에 개선 -->
+	<!--<select id="getUserById" resultType="map">
+		select
+		 userid as username, 
+		 password as password, 
+		 authority as authority from member where userid = #{userid}
+	</select> -->
 	
 	
 </mapper>	

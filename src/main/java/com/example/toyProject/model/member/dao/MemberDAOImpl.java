@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.example.toyProject.model.member.dto.MemberDTO;
@@ -93,11 +94,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	//스프링 시큐리티에서 사용할 메소드 나중에 개선
-	@Override
-	public MemberDTO getUserById(String userid) {
-		
-		return sqlSession.selectOne("member.getUserById", userid);
-	}
+//	@Override
+//	public MemberDTO getUserById(String userid) {
+//		
+//		return sqlSession.selectOne("member.getUserById", userid);
+//	}
 	
 	
 }

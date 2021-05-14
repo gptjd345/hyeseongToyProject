@@ -2,6 +2,8 @@ package com.example.toyProject.model.member.dao;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.example.toyProject.model.member.dto.MemberDTO;
 
 public interface MemberDAO {
@@ -32,5 +34,5 @@ public interface MemberDAO {
 	 void delete(List<String> list);
 	 
 	 //스프링 시큐리티에서 사용할 메소드 나중에 개선
-	 MemberDTO getUserById(String userid);
+//	 MemberDTO getUserById(String userid);
 }

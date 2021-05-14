@@ -62,7 +62,7 @@
 											<input type="hidden" name="curBlock" value="${pageDTO.curBlock}"/>
 											<input type="hidden" name="searchOption" value="${pageDTO.searchOption}"/>
 											<input type="hidden" name="searchKey" value="${pageDTO.searchKey}"/>
-					
+										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 											
 	                                    <div class="col-md-12 form-group">
 	                                        <button type="submit" value="submit" class="btn_3" id="signUp">

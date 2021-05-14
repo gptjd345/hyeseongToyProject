@@ -50,7 +50,7 @@
                             <div class="login_part_form_iner">
                                 <h3>Welcome Back ! <br>
                                     Please Sign in now</h3>
-                                <form class="row contact_form" id="login-form" action="/member/login.do" method="post">
+                                <form class="row contact_form" id="login-form" action="login.do" method="post">
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="userid" name="userid" value=""
                                             placeholder="User ID">
@@ -64,6 +64,8 @@
                                             <!-- <input type="checkbox" id="f-option" name="selector">
                                             <label for="f-option">Remember me</label> -->
                                         </div>
+                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+
                                         <button type="button" class="btn_3" id="login">
                                             log in 
                                         </button>

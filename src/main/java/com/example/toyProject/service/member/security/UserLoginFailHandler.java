@@ -1,4 +1,4 @@
-package com.example.toyProject.service.member;
+package com.example.toyProject.service.member.security;
 
 import java.io.IOException;
 
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 
 /* 로그인 실패 대응 로직  */
-@Service
 public class UserLoginFailHandler implements AuthenticationFailureHandler
 {
 

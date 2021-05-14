@@ -85,17 +85,17 @@ public class MemberController
 		
 		List<MemberDTO> list = memberService.list(start,pageDTO.getSearchOption(),pageDTO.getSearchKey());
 		
-	/*	System.out.println("totalPage = "+totalPage);
+		System.out.println("totalPage = "+totalPage);
 		System.out.println("curBlock:"+pageDTO.getCurBlock());
 		System.out.println("searchOption:"+pageDTO.getSearchOption());
 		System.out.println("searchKey:"+pageDTO.getSearchKey());
 		System.out.println("start:"+start);
 		System.out.println("list:"+list);
 		
-		기본적으로 	ArrayList 를 사용한다. 	
-		System.out.println(list instanceof ArrayList);
-		System.out.println(list instanceof LinkedList);
-	 */
+		//기본적으로 	ArrayList 를 사용한다. 	
+		//System.out.println(list instanceof ArrayList);
+		//System.out.println(list instanceof LinkedList);
+	 
 		
 		ModelAndView mav = new ModelAndView();
 		

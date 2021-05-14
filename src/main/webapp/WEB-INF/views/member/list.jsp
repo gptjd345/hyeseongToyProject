@@ -43,7 +43,7 @@
             <div class="table-responsive">
             
 		      <!--================ 검색 폼  ====================-->
-		      <form action="list.do" method="get">
+		      <form action="list.do" method="post">
 		      	<input type="hidden" name="curBlock" value="${pageDTO.curBlock}"/>
 			      <section id="search-section">
 			      <!-- =========== 검색 정보 유지================= -->
@@ -97,7 +97,7 @@
 			            <div class="col-lg-2">
 			                <input type="text" class="form-control" name="searchKey" value="${pageDTO.searchKey}">
 			            </div>
-			            <button type="submit" class="btn-secondary">검색</button>
+			            <button id="searchButton" type="button" class="btn-secondary">검색</button>
 			       </section>
 		       </form>
 		       
@@ -139,7 +139,7 @@
 	              	<c:choose>
 	              		<c:when test="${startBlock > 1}">
 			                <a href="list.do?curBlock=${startBlock - 1}&searchOption=${pageDTO.searchOption}&searchKey=${pageDTO.searchKey}">
-			                	<span><i class="fas fa-angle-left" title="이전"></i><span>
+			                	<span><i class="fas fa-angle-left" title="이전"></i></span>
 			                </a>
 		                </c:when>
 		                <c:otherwise>
@@ -162,7 +162,7 @@
               		<!-- startBlock + 10 이 마지막 블록보다 크면 다음 버튼을 보여주지않는다. -->
               		<c:choose>
               			<c:when test="${startBlock + 10 <= lastBlock}">	
-	                		<a href="list.do?curBlock=${startBlock + 10}&searchOption=${pageDTO.searchOption}&searchKey=${pageDTO.searchKey}"><span><i class="fas fa-angle-right" title="다음"></i><span></a>
+	                		<a href="list.do?curBlock=${startBlock + 10}&searchOption=${pageDTO.searchOption}&searchKey=${pageDTO.searchKey}"><span><i class="fas fa-angle-right" title="다음"></i></span></a>
 	                	</c:when>
 	                	<c:otherwise>
 	                		
@@ -183,7 +183,8 @@
 		         
 		             </div>
               </form>
-              
+          </div>
+          </div>    
       </section>
       <!--================End Cart Area =================-->
   </main>
