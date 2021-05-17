@@ -11,12 +11,15 @@
     margin-top : 40px;
 }
 
-#pager a
+#pager button
 {
-    color : #635c5c
+    color : white;
+    background-color : #007bff;
+    border-color : #007bff;
+    margin : 6px;
 }
 
-#pager a span
+#pager span
 {
     margin : 6px;
 }

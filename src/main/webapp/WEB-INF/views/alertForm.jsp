@@ -8,15 +8,22 @@
 </head>
 <body>
 <!-- 컨트롤러에서 alert 메시지를 보내고 싶을 때 사용한다. -->
+
+<form action="${url}" method="post" id="form1" name="form1">
+<input type="hidden" name="curBlock" value="${pageDTO.curBlock}" >
+<input type="hidden" name="searchOption" value="${pageDTO.searchOption}">
+<input type="hidden" name="searchKey" value="${pageDTO.searchKey}">
+
+</form>
+
 <script type="text/javascript">
 var message = "${msg}";
-var returnUrl = "${url}";
 alert(message);
 
-document.location.replace(encodeURI(returnUrl));
+document.form1.submit();
+
 
 </script>
-
 
 
 </body>

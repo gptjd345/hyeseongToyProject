@@ -1,12 +1,17 @@
 package com.example.toyProject.controller.member;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,8 +75,18 @@ public class MemberController
 	}
 	
 
-	@RequestMapping("list.do")
+	@RequestMapping("list")
 	public ModelAndView list(@ModelAttribute PageDTO pageDTO)
+	{	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/list");
+		mav.addObject("pageDTO",pageDTO);
+		
+		return mav;		
+	}
+	
+	@RequestMapping("tableInit.do")
+	public @ResponseBody Map<String,Object> tableInit(@RequestBody PageDTO pageDTO)
 	{
 		
 		//전체 레코드 수 알아옴
@@ -92,19 +107,13 @@ public class MemberController
 		System.out.println("start:"+start);
 		System.out.println("list:"+list);
 		
-		//기본적으로 	ArrayList 를 사용한다. 	
-		//System.out.println(list instanceof ArrayList);
-		//System.out.println(list instanceof LinkedList);
-	 
+		Map<String,Object> map = new HashMap<String,Object>(); 
+		map.put("list", list);
+		map.put("totalPage", totalPage);
+		map.put("pageDTO", pageDTO);
 		
-		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("member/list");
-		mav.addObject("list",list);
-		mav.addObject("totalPage",totalPage);
-		mav.addObject("pageDTO",pageDTO);
-		
-		return mav;
+		return map;
 		
 	}
 	
@@ -156,7 +165,8 @@ public class MemberController
 	
 	//회원 등록 처리
 	@RequestMapping("/regist.do")
-	public ModelAndView regist(@ModelAttribute MemberDTO dto , @ModelAttribute PageDTO pageDTO)
+	public ModelAndView regist(@ModelAttribute MemberDTO dto , @ModelAttribute PageDTO pageDTO) 
+			throws UnsupportedEncodingException
 	{
 		System.out.print("회원 등록 전: "+ dto.toString()); 
 		System.out.println("회원 등록 --> PageDTO : "+pageDTO);
@@ -166,7 +176,8 @@ public class MemberController
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("alert");
 		mav.addObject("msg", "등록 되었습니다. ");
-		mav.addObject("url", "/member/list.do?curBlock="+pageDTO.getCurBlock()+
+		
+		mav.addObject("url", "/member/list.do?curBlock="+pageDTO.getCurBlock()+ 
 				"&searchOption="+pageDTO.getSearchOption()+"&searchKey="+pageDTO.getSearchKey());
 		
 		return mav;
@@ -211,19 +222,14 @@ public class MemberController
 	
 	//회원 삭제 수행
 	@RequestMapping("/delete.do")
-	public ModelAndView delete(@RequestParam List<String> list, @ModelAttribute PageDTO pageDTO)
+	public @ResponseBody String delete(@RequestParam List<String> selectedRow)
 	{
-		System.out.println("회원 삭제할 리스트(아이디) : "+list);
-		memberService.delete(list);
+		System.out.println("회원 삭제할 리스트(아이디) : "+selectedRow);
+		memberService.delete(selectedRow);
 		
-		ModelAndView mav = new ModelAndView();
+
 		
-		mav.setViewName("alert");
-		mav.addObject("msg", "삭제되었습니다. ");
-		mav.addObject("url", "/member/list.do?curBlock="+pageDTO.getCurBlock()+
-					"&searchOption="+pageDTO.getSearchOption()+"&searchKey="+pageDTO.getSearchKey());
-		
-		return mav;
+		return "success";
 	}
 	
 	
