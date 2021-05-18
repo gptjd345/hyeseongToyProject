@@ -166,7 +166,6 @@ public class MemberController
 	//회원 등록 처리
 	@RequestMapping("/regist.do")
 	public ModelAndView regist(@ModelAttribute MemberDTO dto , @ModelAttribute PageDTO pageDTO) 
-			throws UnsupportedEncodingException
 	{
 		System.out.print("회원 등록 전: "+ dto.toString()); 
 		System.out.println("회원 등록 --> PageDTO : "+pageDTO);
@@ -222,14 +221,19 @@ public class MemberController
 	
 	//회원 삭제 수행
 	@RequestMapping("/delete.do")
-	public @ResponseBody String delete(@RequestParam List<String> selectedRow)
+	public ModelAndView delete(@RequestParam List<String> list, @ModelAttribute PageDTO pageDTO)
 	{
-		System.out.println("회원 삭제할 리스트(아이디) : "+selectedRow);
-		memberService.delete(selectedRow);
+		System.out.println("회원 삭제할 리스트(아이디) : "+list);
+		memberService.delete(list);
 		
-
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("alert");
+		mav.addObject("msg", "삭제되었습니다. ");
+		mav.addObject("url", "/member/list.do?curBlock="+pageDTO.getCurBlock()+
+				"&searchOption="+pageDTO.getSearchOption()+"&searchKey="+pageDTO.getSearchKey());
 		
-		return "success";
+		
+		return mav;
 	}
 	
 	

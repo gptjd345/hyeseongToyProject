@@ -4,30 +4,15 @@
 
 $('#delete').click(function(e) 
 {
-	let selectedRow = [];
-	
+				
 	$('input[name=checkbox]:checked').each(function(e){
-		selectedRow.push($(this).val());
+		let value = $(this).val(); 
+		$('#deleteForm').append($('<input/>',{type:'hidden',name:'list',value:value}));
 	});
-	console.log("selectedRow : "+selectedRow)
-	$.ajax({
-	    url: "/member/delete.do",
-	    type: "post",
-	//traditional 옵션을 사용하면 배열전달가능 
-	    traditional : true,
-	    data: { "selectedRow" : selectedRow } ,
-	    dataType: "text",
-	    success: function(result)
-	    {
-        	alert("삭제 되었습니다.");
-        	var uri = "/member/list?curBlock="+$('.curBlock').val()+"&searchOption="
-        				+$('.searchOption').val()+"&searchKey="+$('.searchKey').val();
-            window.location.replace(uri);
-
-	        
-	       
-	    }
-	});
+	
+	$('#deleteForm').submit();
+     
+	
 });
 
 
@@ -152,6 +137,16 @@ tableInit();
 ////버튼 클릭시 ajax 통신 
 $('#searchButton').click(function(e)
 {	
+	let searchOption = $('input[name=searchOption]').val();
+	let searchKey = $('input[name=searchKey]').val();
+	
+	console.log("searchOption : "+searchOption+" searchKey :"+searchKey);
+	//검색옵션을 저장
+	$('input[name=searchOption]').attr('value',searchOption);
+	
+	//검색 키워드 저장
+	$('input[name=searchKey]').attr('value',searchKey);
+	
 	//테이블 초기화 함수 실행
 	tableInit();		
 });

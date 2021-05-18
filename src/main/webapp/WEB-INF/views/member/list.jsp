@@ -156,7 +156,7 @@
 	
 	<!-- Toy Project JS -->
 
-	<script src="/resources/assets/js/toyProject/member/list.js?ver1.6"></script>
+	<script src="/resources/assets/js/toyProject/member/list.js?ver1.8"></script>
 	
 	<!-- 날짜 포맷을 위한 라이브러리 jstl의 format date 와 유사  -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
