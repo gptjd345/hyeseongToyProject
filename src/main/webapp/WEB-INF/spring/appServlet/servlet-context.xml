@@ -40,7 +40,22 @@
 		
 	</interceptors> 
 	
-
+	<!-- HttpInvoker Export 할 서비스 내용 -->
+	<beans:bean name="memberSerivceExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+     <beans:property name="service" ref="memberServiceImpl"/>      
+     <beans:property name="serviceInterface" value="com.example.toyProject.service.member.MemberService"/>  
+    </beans:bean>
+	
+	<!-- 핸들러 매핑을 빈으로 등록해서 httpinvoker를 이용한 처리를 맡긴다.  -->
+	<beans:bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<beans:property name="mappings">
+			<beans:props>
+				<beans:prop key="/httpinvoker/MemberService.http">memberSerivceExporter</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+	
 	
 	
 	
