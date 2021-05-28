@@ -221,19 +221,11 @@ public class MemberController
 	
 	//회원 삭제 수행
 	@RequestMapping("/delete.do")
-	public ModelAndView delete(@RequestParam List<String> list, @ModelAttribute PageDTO pageDTO)
+	public @ResponseBody void delete(@RequestParam List<String> selectedRow)
 	{
-		System.out.println("회원 삭제할 리스트(아이디) : "+list);
-		memberService.delete(list);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("alert");
-		mav.addObject("msg", "삭제되었습니다. ");
-		mav.addObject("url", "/member/list.do?curBlock="+pageDTO.getCurBlock()+
-				"&searchOption="+pageDTO.getSearchOption()+"&searchKey="+pageDTO.getSearchKey());
-		
-		
-		return mav;
+		System.out.println("회원 삭제할 리스트(아이디) : "+selectedRow);
+		memberService.delete(selectedRow);
+			
 	}
 	
 	

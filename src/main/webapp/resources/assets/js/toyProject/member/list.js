@@ -4,15 +4,28 @@
 
 $('#delete').click(function(e) 
 {
-				
-	$('input[name=checkbox]:checked').each(function(e){
-		let value = $(this).val(); 
-		$('#deleteForm').append($('<input/>',{type:'hidden',name:'list',value:value}));
+	let selectedRow = [];
+	
+	//checkbox의 value 속성에는 userid 값이 들어있다. 
+	//checkbox의 부모 태그 중 tr 태그선택한다. 
+	//tr태그의 display 속성을 none으로 지정하면 테이블에서 해당 로우를 안보이게 할 수 있다. 
+	$('.table tr:visible input[name=checkbox]:checked').each(function(e){
+		$(this).closest('tr').css('display','none');
+		selectedRow.push($(this).val());
 	});
-	
-	$('#deleteForm').submit();
-     
-	
+	console.log("selectedRow : "+selectedRow)
+	$.ajax({
+	    url: "/member/delete.do",
+	    type: "post",
+	//traditional 옵션을 사용하면 배열전달가능 
+	    traditional : true,
+	    data: { "selectedRow" : selectedRow } ,
+	    dataType: "text",
+	    success: function(pageDTO)
+	    {
+        	alert("삭제 되었습니다.");    
+	    }
+	});
 });
 
 
