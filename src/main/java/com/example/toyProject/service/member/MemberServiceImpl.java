@@ -6,11 +6,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.toyProject.controller.member.CustomHttpRequestServlet;
 import com.example.toyProject.model.member.dao.MemberDAO;
 import com.example.toyProject.model.member.dto.MemberDTO;
 
@@ -95,6 +97,13 @@ public class MemberServiceImpl implements MemberService {
 	public void delete(List<String> list) {
 		memberDAO.delete(list);
 		
+	}
+	
+	//HttpServletRequest 객체 직렬화 가능한지 체크 해시코드 반환 
+	@Override
+	public int CanISerialize(CustomHttpRequestServlet req) {
+		// TODO Auto-generated method stub
+		return req.hashCode();
 	}
 	
 	

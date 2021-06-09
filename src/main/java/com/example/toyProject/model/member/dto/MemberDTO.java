@@ -3,8 +3,24 @@ package com.example.toyProject.model.member.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-public class MemberDTO implements Serializable{
+class Person
+{
+	private String hello = "hello";
 	
+	Person(String hello)
+	{
+		this.hello = hello;
+	}
+}
+
+
+public class MemberDTO extends Person implements Serializable{
+	
+	public MemberDTO() {
+		super("hello");
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 직렬화 역직렬화 과정에서 값이 서로 맞는지 확인 한 후에 처리를 함
 	 * 이 값이 맞지 않다면 InvalidClassException 예외가 발생한다. 
