@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.example</groupId>
-	<artifactId>toyProject</artifactId>
-	<name>toyProject</name>
+	<artifactId>hyeseongToyProject</artifactId>
+	<name>hyeseongToyProject</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -14,7 +14,37 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-
+	
+		<!-- @Generated 자동생성기가 만든 코드라는 것을 알려주는 어노테이션인데 없으면에러라서 받음 -->
+		<dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>javax.annotation-api</artifactId>
+		    <version>1.3.2</version>
+		</dependency>
+		
+		<!-- stub이 생성안되서 추가함 필수 -->
+		<dependency>
+		    <groupId>com.google.protobuf</groupId>
+		    <artifactId>protobuf-java</artifactId>
+		    <version>3.15.5</version>
+		</dependency>
+	
+		<!-- GRPC -->
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-netty-shaded</artifactId>
+			<version>1.31.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-protobuf</artifactId>
+			<version>1.31.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-stub</artifactId>
+			<version>1.31.1</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
 		<dependency>
@@ -73,21 +103,21 @@
 	
 	
 		 
-		<!-- json객체를 사용하기위한 라이브러리 -->
+		<!-- json객체�??�용?�기?�한 ?�이브러�? -->
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		    <version>2.8.2</version>
 		</dependency>
 		
-		<!-- json 데이터, object 데이터 변환   -->
+		<!-- json ?�이?? object ?�이??변??  -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.10.1</version>
 		</dependency>
 		
-		<!-- jackson json 처리 라이브러리 -->
+		<!-- jackson json 처리 ?�이브러�?-->
 		<dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
@@ -206,14 +236,14 @@
 		    <version>2.5.1</version>
 		</dependency>
 		
-		 <!--  jdbc driver DataSource인터페이스 사용을 위해 설치 -->
+		 <!--  jdbc driver DataSource?�터?�이???�용???�해 ?�치 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
-		<!-- 에러 driverClassName threw exception nested exception DB-log4j 사용관련하여 추가해줘야함  -->
+		<!-- ?�러 driverClassName threw exception nested exception DB-log4j ?�용관?�하??추�??�줘?�함  -->
 		
 		
 		
@@ -235,6 +265,58 @@
 	</dependencies>
     <build>
         <plugins>
+          <!--  GRPC 플러그인 시작 -->
+            <plugin>
+				<groupId>org.xolstice.maven.plugins</groupId>
+				<artifactId>protobuf-maven-plugin</artifactId>
+				<version>0.6.1</version>
+				<configuration>
+					<protocArtifact>com.google.protobuf:protoc:3.12.0:exe:${os.detected.classifier}</protocArtifact>
+					<pluginId>grpc-java</pluginId>
+					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.31.1:exe:${os.detected.classifier}</pluginArtifact>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>compile-custom</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+            <!-- 추가적인 컴파일용 코드 -->
+		     <plugin>
+              <groupId>com.github.os72</groupId>
+              <artifactId>protoc-jar-maven-plugin</artifactId>
+              <version>3.5.1</version>
+              <executions>
+                  <execution>
+                      <phase>generate-sources</phase>
+                      <goals>
+                          <goal>run</goal>
+                      </goals>
+                      <configuration>
+                          <protocArtifact>com.google.protobuf:protoc:3.0.0</protocArtifact>
+                          <inputDirectories>
+                              <include>src/main/resources</include>
+                          </inputDirectories>
+                         <outputTargets>
+                              <outputTarget>
+                                  <type>java</type>
+                                  <outputDirectory>src/main/java</outputDirectory>
+                              </outputTarget>
+                              <outputTarget>
+                                  <type>grpc-java</type>
+                                  <outputDirectory>src/main/java</outputDirectory>
+                                  <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.0.1</pluginArtifact>
+                              </outputTarget>
+                          </outputTargets>
+                      </configuration>
+                  </execution>
+              </executions>
+       </plugin>
+			<!-- GRPC 플러그인 끝 -->
+			
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.9</version>

@@ -15,12 +15,31 @@ import org.springframework.stereotype.Service;
 import com.example.toyProject.controller.member.CustomHttpRequestServlet;
 import com.example.toyProject.model.member.dao.MemberDAO;
 import com.example.toyProject.model.member.dto.MemberDTO;
+import com.grpctest.HelloServiceGrpc;
+import com.grpctest.HelloWorldRequest;
+import com.grpctest.HelloWorldResponse;
+
+import io.grpc.stub.StreamObserver;
 
 @Service
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImpl extends HelloServiceGrpc.HelloServiceImplBase implements MemberService {
 	
 	@Inject
 	MemberDAO memberDAO;
+	
+	
+    @Override
+    public void helloWorldPrint(HelloWorldRequest request, StreamObserver<HelloWorldResponse> responseObserver) {
+        HelloWorldResponse helloWorldResponse = HelloWorldResponse.newBuilder()
+                .setMsg("WellCome TO the Hell")
+                .build();
+ 
+        responseObserver.onNext(helloWorldResponse);
+        responseObserver.onCompleted();
+    }
+
+
+
 	
 	@Override
 	public MemberDTO login_Check(MemberDTO dto, HttpSession session) {
