@@ -3,24 +3,7 @@ package com.example.toyProject.model.member.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-class Person
-{
-	private String hello = "hello";
-	
-	Person(String hello)
-	{
-		this.hello = hello;
-	}
-}
-
-
-public class MemberDTO extends Person implements Serializable{
-	
-	public MemberDTO() {
-		super("hello");
-		// TODO Auto-generated constructor stub
-	}
-
+public class MemberDTO implements Serializable{
 	/**
 	 * 직렬화 역직렬화 과정에서 값이 서로 맞는지 확인 한 후에 처리를 함
 	 * 이 값이 맞지 않다면 InvalidClassException 예외가 발생한다. 
@@ -35,15 +18,15 @@ public class MemberDTO extends Person implements Serializable{
 	private Date joindate;
 	
 	//사용자의 권한
-	private String authority;
-
-	
-	public String getAuthority() {
-		return authority;
-	}
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
+//	private String authority;
+//
+//	
+//	public String getAuthority() {
+//		return authority;
+//	}
+//	public void setAuthority(String authority) {
+//		this.authority = authority;
+//	}
 	public int getMembernum() {
 		return membernum;
 	}
@@ -84,7 +67,7 @@ public class MemberDTO extends Person implements Serializable{
 	@Override
 	public String toString() {
 		return "MemberDTO [membernum=" + membernum + ", userid=" + userid + ", password=" + password + ", name=" + name
-				+ ", phonenum=" + phonenum + ", joindate=" + joindate + ", authority=" + authority + "]";
+				+ ", phonenum=" + phonenum + ", joindate=" + joindate + ", authority=" +"]";
 	}
 	
 	

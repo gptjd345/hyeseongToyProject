@@ -1,15 +1,10 @@
 package com.example.toyProject.service.member;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.toyProject.controller.member.CustomHttpRequestServlet;
@@ -27,11 +22,12 @@ public class MemberServiceImpl extends HelloServiceGrpc.HelloServiceImplBase imp
 	@Inject
 	MemberDAO memberDAO;
 	
-	
+
     @Override
     public void helloWorldPrint(HelloWorldRequest request, StreamObserver<HelloWorldResponse> responseObserver) {
-        HelloWorldResponse helloWorldResponse = HelloWorldResponse.newBuilder()
-                .setMsg("WellCome TO the Hell")
+       
+    	HelloWorldResponse helloWorldResponse = HelloWorldResponse.newBuilder()
+                .setMsg(request.getMsg()+"WellCome TO the Hell")
                 .build();
  
         responseObserver.onNext(helloWorldResponse);
